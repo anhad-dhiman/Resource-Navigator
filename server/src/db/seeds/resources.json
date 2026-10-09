@@ -1,0 +1,502 @@
+[
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Lookout Society",
+      "description": "Provides emergency shelters, supportive housing, and health services for homeless and at-risk adults across Metro Vancouver.",
+      "physical_address": "544 Columbia Street",
+      "city": "New Westminster",
+      "contact_phone": "604-255-0340",
+      "official_url": "https://lookoutsociety.ca",
+      "operating_hours": "Admin office Mon-Fri 9am-5pm; individual shelters operate 24/7",
+      "eligibility_criteria": "Low-income and homeless adults 19+; self-referral or agency referral, no fixed address required",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Lookout Housing and Health Society official contact page (lookoutsociety.ca/contact-us), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Union Gospel Mission",
+      "description": "Provides emergency shelter, meals, recovery programs, and transitional housing for people experiencing homelessness and poverty.",
+      "physical_address": "601 East Hastings Street",
+      "city": "Vancouver",
+      "contact_phone": "604-253-3323",
+      "official_url": "https://ugm.ca",
+      "operating_hours": "Reception open 24/7; meals served at set times daily",
+      "eligibility_criteria": "Open to adults in need; no cost for emergency services, some programs require application/interview",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Union Gospel Mission official contact page (ugm.ca/contact-us), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Atira",
+      "description": "Provides emergency shelter, transitional and long-term housing, and support services for women and children affected by violence and poverty.",
+      "physical_address": "#201-190 Alexander Street",
+      "city": "Vancouver",
+      "contact_phone": "604-681-4437",
+      "official_url": "https://atira.bc.ca",
+      "operating_hours": "Office Mon-Fri 8:30am-5pm; shelters operate 24/7",
+      "eligibility_criteria": "Women (including trans women) and children impacted by violence or poverty; low income",
+      "language_support": "Arabic, Cantonese, Mandarin, English, Farsi, French, Hindi, Korean, Punjabi, Sign Language, Spanish, Tagalog, Tamil, Urdu"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Canadian Human Trafficking Hotline directory and 211 BC agency listing (bc.211.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Rain City Housing",
+      "description": "Provides supportive housing, shelters, and outreach services for people experiencing homelessness with complex health and mental health needs.",
+      "physical_address": "616 Powell Street",
+      "city": "Vancouver",
+      "contact_phone": "604-662-7023",
+      "official_url": "https://www.raincityhousing.org",
+      "operating_hours": "Office Mon-Fri 8:00am-5:00pm; many housing sites operate 24/7",
+      "eligibility_criteria": "Adults experiencing or at risk of homelessness; referral often via BC Housing Registry",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and RainCity Housing official contact page (raincityhousing.org/contact), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "PHS Community Services Society",
+      "description": "Provides low-barrier supportive housing, shelter, harm reduction, and health services for marginalized and homeless individuals.",
+      "physical_address": "Unit 90 - 425 Carrall Street",
+      "city": "Vancouver",
+      "contact_phone": "604-683-0073",
+      "official_url": "https://www.phs.ca",
+      "operating_hours": "Office Mon-Fri 9am-5pm; housing and shelter sites operate 24/7",
+      "eligibility_criteria": "Homeless or marginally housed adults; referral through BC Housing Supportive Housing Registry",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and PHS Community Services Society official site (phs.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "The Greater Vancouver Food Bank",
+      "description": "Distributes food hampers and nutrition programs to individuals and families facing food insecurity across Vancouver, Burnaby, New Westminster, and the North Shore.",
+      "physical_address": "8345 Winston Street",
+      "city": "Burnaby",
+      "contact_phone": "604-876-3601",
+      "official_url": "https://foodbank.bc.ca",
+      "operating_hours": "Distribution hub hours vary by site (typically Tue-Fri); admin office Mon-Fri 8:30am-4pm",
+      "eligibility_criteria": "Individuals/families with proof of income, ID, and address within catchment area; registration and appointment required",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and foodbank.bc.ca registration page, Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Quest Outreach Society",
+      "description": "Operates not-for-profit grocery markets offering affordable groceries to individuals referred by community agencies due to low income.",
+      "physical_address": "2020 Dundas Street",
+      "city": "Vancouver",
+      "contact_phone": "604-602-0186",
+      "official_url": "https://www.questoutreach.org",
+      "operating_hours": "Mon-Fri 10am-6pm; Sat 10am-4pm (varies by location)",
+      "eligibility_criteria": "Must be referred by a partner charity, nonprofit, school, church, or healthcare provider; low-income criteria apply",
+      "language_support": "English (multilingual referral partners)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Quest Outreach Society official site (questoutreach.org) market hours and contact pages, Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Surrey Food Bank",
+      "description": "Provides food hampers and nutrition support to low-income individuals and families in Surrey and North Delta.",
+      "physical_address": "Unit 1 - 13478 78th Avenue",
+      "city": "Surrey",
+      "contact_phone": "604-581-5443",
+      "official_url": "https://surreyfoodbank.org",
+      "operating_hours": "Distribution Mon, Tue, Thu, Fri 9:30am-1pm; office Mon-Fri 8am-4pm",
+      "eligibility_criteria": "Government-issued photo ID and proof of address required; new registrations by appointment",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Surrey Food Bank official contact page (surreyfoodbank.org/contact), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Richmond Food Bank",
+      "description": "Provides grocery hampers and food security programs to individuals and families in need in Richmond.",
+      "physical_address": "#100-5800 Cedarbridge Way",
+      "city": "Richmond",
+      "contact_phone": "604-271-5609",
+      "official_url": "https://rfbs.org",
+      "operating_hours": "Main office Mon-Fri 9am-4pm, Sat 9am-2pm; distribution hours vary by depot",
+      "eligibility_criteria": "Low-income Richmond residents; registration required",
+      "language_support": "English (interpretation available on request)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Richmond Food Bank Society official contact and FAQ pages (rfbs.org), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Guru Nanak’s Free Kitchen",
+      "description": "Provides free food hampers and community meals to individuals and families in need, open to all regardless of background.",
+      "physical_address": "245 East Hastings Street",
+      "city": "Vancouver",
+      "contact_phone": "604-617-7382",
+      "official_url": "https://www.gnfk.org",
+      "operating_hours": "Office Mon-Fri 2pm-6pm, Sat-Sun 12:30pm-6pm; registration walk-in Mon-Fri 1pm-3pm",
+      "eligibility_criteria": "Low-income individuals; picture ID, proof of residence, and proof of low income required",
+      "language_support": "English, Punjabi"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Legal Aid BC",
+      "description": "Provides free legal representation, advice, and information for low-income residents on criminal, family, child protection, and some immigration matters.",
+      "physical_address": "400-510 Burrard Street",
+      "city": "Vancouver",
+      "contact_phone": "604-408-2172",
+      "official_url": "https://legalaid.bc.ca",
+      "operating_hours": "Mon, Tue, Thu, Fri 9am-4pm; Wed 9am-2:30pm",
+      "eligibility_criteria": "Financial eligibility test (low income); priority for criminal, family, child protection, and immigration cases",
+      "language_support": "English; interpreters available on request"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Legal Aid BC official contact page (legalaid.bc.ca/contact/call-us) and 211 BC, Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Access Pro Bono Society of British Columbia",
+      "description": "Connects low- and modest-income individuals and nonprofits with volunteer lawyers for free summary legal advice and representation.",
+      "physical_address": "300-845 Cambie Street",
+      "city": "Vancouver",
+      "contact_phone": "604-878-7400",
+      "official_url": "https://www.accessprobono.ca",
+      "operating_hours": "Office Mon-Fri 9am-5pm; clinic appointment times vary by location",
+      "eligibility_criteria": "Low- and modest-income individuals and nonprofit organizations of limited means",
+      "language_support": "English; interpretation may be arranged"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Access Pro Bono official contact page (accessprobono.ca/contact-us), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Community Legal Assistance Society",
+      "description": "Offers free legal assistance for low-income people on housing, human rights, mental health law, and welfare/benefits appeals.",
+      "physical_address": "300-1140 West Pender Street",
+      "city": "Vancouver",
+      "contact_phone": "604-685-3425",
+      "official_url": "https://clasbc.net",
+      "operating_hours": "Telephone intake Mon-Fri 9am-12pm and 1:30pm-4:30pm",
+      "eligibility_criteria": "Low-income individuals; specific programs for tenancy, human rights, and mental health law",
+      "language_support": "English; interpretation available"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and CLAS official contact page (clasbc.net/about-clas/contact), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "MOSAIC",
+      "description": "Provides legal information, advice, and representation to low-income immigrants and refugees on immigration, poverty, and family law issues.",
+      "physical_address": "5575 Boundary Road",
+      "city": "Vancouver",
+      "contact_phone": "604-254-9626",
+      "official_url": "https://mosaicbc.org",
+      "operating_hours": "Mon-Fri 9am-5pm, visits by appointment only",
+      "eligibility_criteria": "Low-income immigrants and refugees; not currently accepting new immigration-only cases",
+      "language_support": "English, Arabic, Cantonese, Mandarin, French, Farsi, Korean, Spanish, and other languages"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and MOSAIC Legal Advocacy Program page (mosaicbc.org), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Law Students' Legal Advice Program",
+      "description": "UBC law students, supervised by lawyers, provide free legal advice and representation to low-income people on tenancy, employment, small claims, and other civil matters.",
+      "physical_address": "Allard Hall, 1822 East Mall (UBC)",
+      "city": "Vancouver",
+      "contact_phone": "604-822-5791",
+      "official_url": "https://www.lslap.bc.ca",
+      "operating_hours": "Office Mon-Fri 10am-4pm; Carnegie drop-in clinic Mon, Tue, Thu 10am-1pm",
+      "eligibility_criteria": "Low-income Lower Mainland residents; by appointment, ID required, does not cover land/family/personal injury matters",
+      "language_support": "English; Cantonese and Mandarin clinic available"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and LSLAP official contact page (lslap.bc.ca/contact.html), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "REACH Community Health Centre",
+      "description": "Offers primary care, dental, pharmacy, and social support services for low-income and underserved residents, including immigrants and Indigenous people.",
+      "physical_address": "1145 Commercial Drive",
+      "city": "Vancouver",
+      "contact_phone": "604-251-3000",
+      "official_url": "https://reachcentre.bc.ca",
+      "operating_hours": "Mon-Fri approx. 9am-8pm (varies by service), Sat 9am-1pm",
+      "eligibility_criteria": "Open to community members; no-cost/sliding-scale options for low-income residents",
+      "language_support": "Multiple languages via interpretation services"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and REACH Community Health Centre official site (reachcentre.bc.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Vancouver Aboriginal Health Society",
+      "description": "Provides medical, dental, counselling, and social services primarily for Indigenous people and low-income residents of the Downtown Eastside (formerly Vancouver Native Health Society).",
+      "physical_address": "449 East Hastings Street",
+      "city": "Vancouver",
+      "contact_phone": "604-254-9949",
+      "official_url": "https://www.vahs.life",
+      "operating_hours": "Walk-in medical clinic open 7 days/week; evening hours Mon-Thu 4:30pm-8:30pm",
+      "eligibility_criteria": "Open to all, with a focus on Indigenous, low-income, and Downtown Eastside residents; no medical coverage required",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Vancouver Aboriginal Health Society official site (vahs.life), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Three Bridges Community Health Centre (West End)",
+      "description": "Vancouver Coastal Health community health centre offering primary care, mental health services, and specialty care including services for transgender individuals and those without a family doctor.",
+      "physical_address": "1128 Hornby Street",
+      "city": "Vancouver",
+      "contact_phone": "604-331-8900",
+      "official_url": "https://www.vch.ca/en/location/three-bridges-community-health-centre-west-end",
+      "operating_hours": "Mon-Fri 8:30am-5pm (some programs to 8:30pm)",
+      "eligibility_criteria": "Open to Vancouver Coastal Health area residents; no-cost services covered under MSP",
+      "language_support": "English; interpretation available through VCH"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Vancouver Coastal Health official site (vch.ca) and 211 BC, Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Kilalalelum",
+      "description": "Provides culturally safe primary care, mental health, and social support for Indigenous individuals and community members in the Downtown Eastside.",
+      "physical_address": "626 Powell Street",
+      "city": "Vancouver",
+      "contact_phone": "604-620-4010",
+      "official_url": "https://kilalalelum.ca",
+      "operating_hours": "Open 7 days/week, 10am-4pm",
+      "eligibility_criteria": "Open to Indigenous individuals and community members, with a focus on those facing barriers to healthcare",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Kilala Lelum official contact page (kilalalelum.ca/contact), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Options Community Services",
+      "description": "Provides mental health support, a 24-hour crisis line, and community health-related services for low-income families and individuals in Surrey, Delta, Langley, and White Rock.",
+      "physical_address": "9815 140th Street (Carole Wahl Building)",
+      "city": "Surrey",
+      "contact_phone": "604-584-5811",
+      "official_url": "https://www.options.bc.ca",
+      "operating_hours": "Office Mon-Fri 9am-5pm; Crisis Line available 24/7",
+      "eligibility_criteria": "Residents of Surrey, Delta, Langley, and White Rock; many programs prioritize low-income clients",
+      "language_support": "English; interpretation available on request"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and Options Community Services official site (options.bc.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "West End Seniors' Network",
+      "description": "Provides social, recreational, and support programs, including the Better at Home non-medical assistance program, for older adults 55+ in Vancouver's West End.",
+      "physical_address": "1447 Barclay Street",
+      "city": "Vancouver",
+      "contact_phone": "604-669-5051",
+      "official_url": "https://wesn.ca",
+      "operating_hours": "Mon-Fri 9am-5pm",
+      "eligibility_criteria": "Adults 55+ living in West End, Yaletown, or Coal Harbour; low-cost or free programs, income-based fee assistance available",
+      "language_support": "English; interpretation available on request"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and WESN official site (wesn.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "S.U.C.C.E.S.S.",
+      "description": "Offers non-medical home support and settlement-related services to help low-income and immigrant seniors age in place.",
+      "physical_address": "28 West Pender Street",
+      "city": "Vancouver",
+      "contact_phone": "604-684-1628",
+      "official_url": "https://successbc.ca",
+      "operating_hours": "Mon-Fri 9am-5pm, by appointment",
+      "eligibility_criteria": "Seniors 55+, with priority given to low-income and newcomer seniors",
+      "language_support": "English, Cantonese, Mandarin, and other languages"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca) and SUCCESS official site (successbc.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Century House Association",
+      "description": "Community seniors' centre offering social, wellness, and educational programs, a lunch program, and free income tax and legal advice clinics for older adults.",
+      "physical_address": "620 Eighth Street",
+      "city": "New Westminster",
+      "contact_phone": "604-519-1066",
+      "official_url": "https://www.centuryhouseassociation.com",
+      "operating_hours": "Sept-June: Mon-Fri 9am-9pm, Sat 9am-4pm, Sun 12pm-4pm; reduced summer hours",
+      "eligibility_criteria": "Adults 50+ in New Westminster; low-cost annual membership, fee subsidies available",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "City of New Westminster official site (newwestcity.ca) and 211 BC, Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Brella Community Service Society",
+      "description": "Provides day programs and community support services, including Better at Home, to help low-income seniors in Surrey and White Rock stay independent.",
+      "physical_address": "15008 26th Avenue",
+      "city": "Surrey",
+      "contact_phone": "604-531-9400",
+      "official_url": "https://www.brellasociety.ca",
+      "operating_hours": "Day programs Mon-Fri 8:30am-3:30pm",
+      "eligibility_criteria": "Seniors in Surrey, White Rock, and North Delta; subsidized fees based on income",
+      "language_support": "English; multilingual volunteers may be available"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Brella Community Services / Seniors Come Share official sites (brellasociety.ca, comeshare.ca), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "411 Seniors Centre Society",
+      "description": "A drop-in centre and advocacy hub offering information, referral, income tax clinics, and social programs specifically for moderate- to low-income seniors.",
+      "physical_address": "3502 Fraser Street",
+      "city": "Vancouver",
+      "contact_phone": "604-684-8171",
+      "official_url": "https://411seniors.org",
+      "operating_hours": "Mon-Fri 9am-4pm",
+      "eligibility_criteria": "Seniors, with a focus on moderate- to low-income older adults in the Lower Mainland",
+      "language_support": "English; multilingual outreach and advocacy for diverse seniors"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "411 Seniors Centre Society official site (411seniors.org), Sept 2026",
+      "reviewed_at": "2026-09-15",
+      "next_review_due": "2026-10-15"
+    }
+  }
+]
