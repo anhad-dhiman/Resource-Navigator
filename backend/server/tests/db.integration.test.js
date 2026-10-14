@@ -62,6 +62,13 @@ describe.skipIf(!url)('database integration', () => {
     expect(rows.map((r) => r.resource_id)).not.toContain(first.resource_id);
   });
 
+  it('lists resources filtered by city and type', async () => {
+    const rows = await repo.list({ city: 'SURREY', serviceType: 'food' });
+    expect(rows.length).toBeGreaterThan(0);
+    for (const r of rows) expect([r.city, r.service_type]).toEqual(['Surrey', 'Food']);
+    expect(await repo.listServiceTypes()).toContain('Legal Aid');
+  });
+
   it('migrations are idempotent', async () => {
     expect(await migrate(pool)).toEqual([]);
   });

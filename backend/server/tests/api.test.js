@@ -23,6 +23,8 @@ function fakeRepository(overrides = {}) {
   return {
     search: vi.fn().mockResolvedValue([ROW]),
     findById: vi.fn().mockResolvedValue(ROW),
+    list: vi.fn().mockResolvedValue([ROW]),
+    listServiceTypes: vi.fn().mockResolvedValue(['Food', 'Housing']),
     listCities: vi.fn().mockResolvedValue(['Surrey', 'Vancouver']),
     ping: vi.fn().mockResolvedValue(),
     ...overrides,
@@ -114,6 +116,26 @@ describe('POST /api/search', () => {
   });
 });
 
+describe('GET /api/resources', () => {
+  it('lists public resources without match_explanation', async () => {
+    const res = await request(app).get('/api/resources');
+    expect(res.status).toBe(200);
+    expect(res.body.count).toBe(1);
+    expect(res.body.resources[0]).not.toHaveProperty('match_explanation');
+    expect(repository.list).toHaveBeenCalledWith({ city: null, serviceType: null });
+  });
+
+  it('passes city and type filters through', async () => {
+    await request(app).get('/api/resources?city=Surrey&type=Food');
+    expect(repository.list).toHaveBeenCalledWith({ city: 'Surrey', serviceType: 'Food' });
+  });
+
+  it('rejects repeated or oversized filters', async () => {
+    expect((await request(app).get('/api/resources?city=a&city=b')).status).toBe(400);
+    expect((await request(app).get(`/api/resources?type=${'x'.repeat(101)}`)).status).toBe(400);
+  });
+});
+
 describe('GET /api/resources/:id', () => {
   it('returns a public resource without match_explanation', async () => {
     const res = await request(app).get('/api/resources/8');
@@ -139,6 +161,11 @@ describe('other routes', () => {
   it('GET /api/cities lists cities', async () => {
     const res = await request(app).get('/api/cities');
     expect(res.body).toEqual({ cities: ['Surrey', 'Vancouver'] });
+  });
+
+  it('GET /api/service-types lists service types', async () => {
+    const res = await request(app).get('/api/service-types');
+    expect(res.body).toEqual({ service_types: ['Food', 'Housing'] });
   });
 
   it('GET /health reports database status', async () => {
