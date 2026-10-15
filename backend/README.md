@@ -4,8 +4,8 @@ Community Resource Navigator for Metro Vancouver. Residents describe a need in p
 language and get verified local services (food, housing, legal aid, health, senior support).
 PostgreSQL is the single source of truth. Every result is a verified database record.
 
-This is the first backend build: a JSON API with database-first search. It does **not**
-include the AI integration, admin features or the React frontend yet.
+This is the backend: a JSON API with database-first search. It does **not** include the AI
+integration or admin features yet. The React frontend is in [`../frontend`](../frontend/README.md).
 
 - `server/`: Express API ([API reference](docs/api.md), [schema](docs/schema.md))
 - `docs/`: API and schema documentation

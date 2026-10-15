@@ -38,6 +38,31 @@ export function createResourceRepository(pool) {
     },
 
     /**
+     * Lists public resources, optionally filtered by city and service type (case-insensitive).
+     * @param {{city: string|null, serviceType: string|null}} params
+     * @returns {Promise<object[]>} Rows ordered by service type, then name.
+     */
+    async list({ city, serviceType }) {
+      const { rows } = await pool.query(
+        `SELECT ${PUBLIC_COLUMNS}
+           FROM public_resources
+          WHERE ($1::text IS NULL OR lower(city) = lower($1))
+            AND ($2::text IS NULL OR lower(service_type) = lower($2))
+          ORDER BY service_type, service_name`,
+        [city, serviceType],
+      );
+      return rows;
+    },
+
+    /** @returns {Promise<string[]>} Distinct service types that have public resources. */
+    async listServiceTypes() {
+      const { rows } = await pool.query(
+        'SELECT DISTINCT service_type FROM public_resources ORDER BY service_type',
+      );
+      return rows.map((r) => r.service_type);
+    },
+
+    /**
      * @param {number} id
      * @returns {Promise<object|null>} The resource, or null if missing or not public.
      */

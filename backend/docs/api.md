@@ -18,6 +18,7 @@ Errors always use this shape:
 | `INVALID_QUERY`       | 400    | Query missing, empty, over 500 chars, or has control chars |
 | `INVALID_CITY`        | 400    | City is not one of the cities in the database              |
 | `INVALID_BODY`        | 400    | Body is not valid JSON or is over 10 KB                    |
+| `INVALID_FILTER`      | 400    | `city` or `type` filter repeated or over 100 characters    |
 | `INVALID_ID`          | 400    | Resource id is not a positive integer                      |
 | `NOT_FOUND`           | 404    | Unknown route, or resource missing / not verified          |
 | `RATE_LIMITED`        | 429    | More than 30 searches per minute from one client           |
@@ -91,6 +92,28 @@ Notes:
 - Ordering: resources whose `service_type` matches an interpreted category first, then full-text rank.
 - The query text is never stored or logged.
 
+## GET /api/resources
+
+Lists every public resource, for browsing. Optional query-string filters, both case-insensitive:
+
+- `city`, e.g. `?city=Surrey`
+- `type` (service type), e.g. `?type=Legal%20Aid`
+
+Ordered by service type, then name. Same fields as a search result, without `match_explanation`.
+
+```json
+{
+  "count": 25,
+  "resources": [
+    {
+      "resource_id": 6,
+      "service_name": "Guru Nanak’s Free Kitchen",
+      "...": "..."
+    }
+  ]
+}
+```
+
 ## GET /api/resources/:id
 
 Detail for one public resource (FR5). Same fields as a search result, without
@@ -106,6 +129,16 @@ Cities that currently have public resources, for the city filter.
 
 ```json
 { "cities": ["Burnaby", "New Westminster", "Richmond", "Surrey", "Vancouver"] }
+```
+
+## GET /api/service-types
+
+Service types that currently have public resources, for category filters.
+
+```json
+{
+  "service_types": ["Food", "Health", "Housing", "Legal Aid", "Senior Support"]
+}
 ```
 
 ## GET /health
