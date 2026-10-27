@@ -5,6 +5,8 @@ import pg from 'pg';
 import { migrate } from '../src/db/migrate.js';
 import { seed } from '../src/db/seed.js';
 import { createResourceRepository } from '../src/db/resourceRepository.js';
+import { createAdminRepository } from '../src/db/adminRepository.js';
+import { createAuthService, hashPassword } from '../src/services/authService.js';
 
 const url = process.env.TEST_DATABASE_URL;
 
@@ -67,6 +69,23 @@ describe.skipIf(!url)('database integration', () => {
     expect(rows.length).toBeGreaterThan(0);
     for (const r of rows) expect([r.city, r.service_type]).toEqual(['Surrey', 'Food']);
     expect(await repo.listServiceTypes()).toContain('Legal Aid');
+  });
+
+  it('creates an admin and signs in against the real table', async () => {
+    const admins = createAdminRepository(pool);
+    const created = await admins.create({
+      username: 'Reviewer1',
+      passwordHash: await hashPassword('a long test password'),
+      role: 'moderator',
+    });
+    expect(created).toEqual({ user_id: expect.any(Number), username: 'Reviewer1', role: 'moderator' });
+    expect(await admins.findById(created.user_id)).not.toHaveProperty('password_hash');
+
+    const auth = createAuthService({ adminRepository: admins, jwtSecret: 'x'.repeat(32) });
+    const session = await auth.login('reviewer1', 'a long test password');
+    expect(session.user.username).toBe('Reviewer1');
+    expect(await auth.verify(session.token)).toEqual(created);
+    expect(await auth.login('reviewer1', 'wrong password')).toBeNull();
   });
 
   it('migrations are idempotent', async () => {

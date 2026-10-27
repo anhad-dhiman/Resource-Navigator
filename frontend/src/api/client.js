@@ -24,9 +24,19 @@ export function onExchange(listener) {
   return () => listeners.delete(listener);
 }
 
+const SECRET_FIELDS = ['password'];
+
+/** Copy of a request body with secret fields masked, for the JSON panel. */
+function redact(body) {
+  if (!body) return null;
+  return Object.fromEntries(
+    Object.entries(body).map(([k, v]) => [k, SECRET_FIELDS.includes(k) ? '••••••' : v]),
+  );
+}
+
 async function request(method, path, body) {
   const started = performance.now();
-  const exchange = { method, path, request: body ?? null, at: new Date().toISOString() };
+  const exchange = { method, path, request: redact(body), at: new Date().toISOString() };
   let res;
   let data = null;
   try {
@@ -34,6 +44,8 @@ async function request(method, path, body) {
       method,
       headers: { Accept: 'application/json', ...(body && { 'Content-Type': 'application/json' }) },
       body: body ? JSON.stringify(body) : undefined,
+      // Sends the admin session cookie when the backend is on another origin (production).
+      credentials: 'include',
     });
     data = await res.json().catch(() => null);
   } catch {
@@ -83,4 +95,15 @@ export const api = {
 
   /** GET /api/service-types → {service_types} */
   listServiceTypes: () => request('GET', '/api/service-types'),
+
+  admin: {
+    /** POST /api/admin/login → {user}. The session is set as an httpOnly cookie, never returned. */
+    login: ({ username, password }) => request('POST', '/api/admin/login', { username, password }),
+
+    /** POST /api/admin/logout → {status} */
+    logout: () => request('POST', '/api/admin/logout'),
+
+    /** GET /api/admin/me → {user}. Throws ApiError with status 401 when not signed in. */
+    me: () => request('GET', '/api/admin/me'),
+  },
 };

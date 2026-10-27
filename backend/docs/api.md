@@ -148,3 +148,50 @@ Service types that currently have public resources, for category filters.
 ```
 
 Returns `503` with `{ "status": "degraded", "database": "unreachable" }` if the database is down.
+
+## Admin authentication
+
+Admin routes live under `/api/admin` and are only enabled when `JWT_SECRET` is set (at least 32
+characters). The session is a JWT in an **httpOnly, SameSite=Strict cookie** named `admin_session`
+(path `/api/admin`, 1 hour). It is never returned in a response body, so page scripts can't read
+it. All admin responses send `Cache-Control: no-store`.
+
+Accounts are created from the command line (there is no sign-up endpoint):
+
+```bash
+npm run admin:create -- --username alice --role moderator    # or --role administrator
+```
+
+| Code                         | Status | When                                                                         |
+| ---------------------------- | ------ | ---------------------------------------------------------------------------- |
+| `INVALID_CREDENTIALS_FORMAT` | 400    | Username or password missing, not a string, or too long                      |
+| `INVALID_CREDENTIALS`        | 401    | Wrong username or password (same message for both)                           |
+| `UNAUTHENTICATED`            | 401    | No session cookie, or it is invalid/expired, or the account no longer exists |
+| `FORBIDDEN`                  | 403    | Signed in, but the role is not allowed for this route                        |
+| `RATE_LIMITED`               | 429    | 10 failed sign-ins from one IP within 15 minutes                             |
+
+### POST /api/admin/login
+
+```json
+{ "username": "alice", "password": "a long password" }
+```
+
+Response `200` (plus `Set-Cookie: admin_session=...; HttpOnly; SameSite=Strict`):
+
+```json
+{ "user": { "user_id": 1, "username": "alice", "role": "moderator" } }
+```
+
+Usernames are matched case-insensitively. Both `administrator` and `moderator` can sign in.
+
+### POST /api/admin/logout
+
+Clears the session cookie. Response: `{ "status": "ok" }`.
+
+### GET /api/admin/me
+
+Requires a session. Returns the signed-in account, loaded fresh from the database:
+
+```json
+{ "user": { "user_id": 1, "username": "alice", "role": "moderator" } }
+```

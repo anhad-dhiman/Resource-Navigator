@@ -31,11 +31,18 @@ src/
   context/             app state: selected city and the latest search (memory only)
   components/          Header, SearchBar, ResourceCard, badges, status messages, JSON panel
   pages/               Home (search), Resources (browse), ResourceDetail, About (incl. privacy)
+  admin/               staff sign-in (/admin/login) and dashboard (/admin)
   lib/                 formatting, category colours, sorting, useApi hook
 ```
 
 Privacy (FR12): the search text is kept in memory only. It is never put in the URL,
 localStorage or analytics.
+
+## Admin
+
+Staff sign in at `/admin/login`. Create an account first with `npm run admin:create` in
+`backend/server` (see the backend README). The session is an httpOnly cookie set by the
+backend; the frontend never sees or stores the token. Passwords are masked in the JSON panel.
 
 ## Checks
 
