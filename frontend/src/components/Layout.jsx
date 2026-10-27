@@ -29,6 +29,10 @@ export default function Layout() {
             ·{' '}
             <Link to="/about#privacy" className="font-semibold text-blue-700 hover:underline">
               Privacy
+            </Link>{' '}
+            ·{' '}
+            <Link to="/admin/login" className="text-slate-500 hover:text-slate-700 hover:underline">
+              Staff sign in
             </Link>
           </p>
         </div>
