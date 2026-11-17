@@ -36,9 +36,11 @@ export default function About() {
 
       <Section id="how" title="How it works">
         <p>
-          You describe what you need in your own words. We match your request against our directory and show
-          you only services that have been checked and verified. Every phone number, address and opening hour
-          comes from our verified records.
+          You describe what you need in your own words. An AI model works out which kinds of services you
+          need, and we search our directory for services that have been checked and verified. Every phone
+          number, address and opening hour comes from our verified records, never from the AI. The AI only
+          writes the short &quot;Why this may help&quot; summary on each card, using that service&apos;s own
+          listing.
         </p>
         <p>
           If nothing matches, we&apos;ll point you to <strong>211 British Columbia</strong> (call or text
@@ -58,8 +60,14 @@ export default function About() {
         <ul className="list-disc space-y-2 pl-5">
           <li>You don&apos;t need an account, and we never ask for your name, email or phone number.</li>
           <li>
-            What you type is used only to find matching services. It is not saved in our database, written to
-            our server logs or used for analytics, and it is never added to the page address.
+            What you type is used only to find matching services. We don&apos;t save it in our database, write
+            it to our server logs or use it for analytics, and it is never added to the page address.
+          </li>
+          <li>
+            To understand your request and explain the matches, what you type is sent to an AI service: Google
+            Gemini, or Groq if Gemini is unavailable. We use Gemini&apos;s free tier, and on Gemini&apos;s
+            free tier, Google may use what you send to improve its products. Don&apos;t include your name,
+            contact details or other information that identifies you.
           </li>
           <li>Your search is cleared when you close or refresh the page.</li>
           <li>

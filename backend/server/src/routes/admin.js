@@ -28,7 +28,7 @@ export function adminRouter({ authService, secureCookies }) {
     path: '/api/admin',
   };
 
-  // Brute-force protection: failed attempts per IP; successful logins don't count.
+  //rate limiter
   const loginLimiter = rateLimit({
     windowMs: 15 * 60_000,
     limit: 10,

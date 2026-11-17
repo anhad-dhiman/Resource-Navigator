@@ -38,6 +38,31 @@ export function createResourceRepository(pool) {
     },
 
     /**
+     * Fallback search when no AI is available: PostgreSQL turns the query into
+     * stemmed words (dropping its own English stop words), and a resource
+     * matching ANY of them is returned, best text rank first.
+     * @param {{query: string, city: string|null, limit: number}} params
+     * @returns {Promise<object[]>}
+     */
+    async searchText({ query, city, limit }) {
+      const { rows } = await pool.query(
+        `WITH tq AS (
+           SELECT to_tsquery('simple', string_agg(quote_literal(word), ' | ')) AS q
+             FROM unnest(tsvector_to_array(to_tsvector('english', $1))) AS word
+         )
+         SELECT ${PUBLIC_COLUMNS}, ts_rank(${SEARCH_DOCUMENT}, tq.q) AS rank
+           FROM public_resources, tq
+          WHERE tq.q IS NOT NULL
+            AND ${SEARCH_DOCUMENT} @@ tq.q
+            AND ($2::text IS NULL OR lower(city) = lower($2))
+          ORDER BY rank DESC, service_name
+          LIMIT $3`,
+        [query, city, limit],
+      );
+      return rows;
+    },
+
+    /**
      * Lists public resources, optionally filtered by city and service type (case-insensitive).
      * @param {{city: string|null, serviceType: string|null}} params
      * @returns {Promise<object[]>} Rows ordered by service type, then name.

@@ -3,6 +3,7 @@ import { createPool } from './db/pool.js';
 import { createResourceRepository } from './db/resourceRepository.js';
 import { createAdminRepository } from './db/adminRepository.js';
 import { createAuthService, MIN_JWT_SECRET_LENGTH } from './services/authService.js';
+import { createAiFromConfig } from './ai/index.js';
 import { createApp } from './app.js';
 
 const pool = createPool();
@@ -19,8 +20,16 @@ if (config.jwtSecret && config.jwtSecret.length >= MIN_JWT_SECRET_LENGTH) {
   );
 }
 
+const ai = createAiFromConfig({ gemini: config.gemini, groq: config.groq, timeoutMs: config.aiTimeoutMs });
+console.log(
+  ai.enabled
+    ? `AI providers: ${[config.gemini.apiKey && `gemini (${config.gemini.model})`, config.groq.apiKey && `groq (${config.groq.model})`].filter(Boolean).join(', then ')}`
+    : 'No AI API keys set: search uses database full-text matching only. See .env.example.',
+);
+
 const app = createApp({
   repository: createResourceRepository(pool),
+  ai,
   authService,
   secureCookies: config.secureCookies,
   corsOrigins: config.corsOrigins,

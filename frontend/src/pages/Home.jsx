@@ -91,7 +91,8 @@ export default function Home() {
           <p className="mx-auto mt-6 flex max-w-lg items-start justify-center gap-2 text-sm text-blue-100">
             <ShieldCheck className="mt-0.5 size-4 shrink-0 text-emerald-300" aria-hidden="true" />
             <span>
-              No account or personal details needed. We don&apos;t save what you type.{' '}
+              No account or personal details needed. We don&apos;t save what you type, but it is sent to an AI
+              service to find matches.{' '}
               <Link to="/about#privacy" className="font-semibold text-white underline underline-offset-2">
                 Read our privacy policy
               </Link>

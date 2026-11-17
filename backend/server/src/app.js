@@ -13,11 +13,13 @@ import { createSearchService } from './services/searchService.js';
 
 /**
  * Builds the Express app. Dependencies are injected so tests can supply fakes.
- * Admin routes are mounted only when an authService is given.
- * @param {{repository: object, authService?: object, secureCookies?: boolean, corsOrigins?: string[], maxQueryLength?: number, maxResults?: number, logRequests?: boolean}} deps
+ * Admin routes are mounted only when an authService is given; without `ai`, search
+ * uses the database's full-text matching only.
+ * @param {{repository: object, ai?: object, authService?: object, secureCookies?: boolean, corsOrigins?: string[], maxQueryLength?: number, maxResults?: number, logRequests?: boolean}} deps
  */
 export function createApp({
   repository,
+  ai,
   authService,
   secureCookies = false,
   corsOrigins = [],
@@ -26,7 +28,7 @@ export function createApp({
   logRequests = true,
 }) {
   const app = express();
-  const searchService = createSearchService({ repository, maxResults });
+  const searchService = createSearchService({ repository, ai, maxResults });
 
   app.disable('x-powered-by');
   app.use(helmet());

@@ -34,7 +34,7 @@ describe('ResourceCard', () => {
 
   it('shows the AI explanation only when present', () => {
     renderCard();
-    expect(screen.queryByText(/why this matches/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/why this may help/i)).not.toBeInTheDocument();
     renderCard({ match_explanation: 'Offers food hampers in Surrey.' });
     expect(screen.getByText('Offers food hampers in Surrey.')).toBeInTheDocument();
   });

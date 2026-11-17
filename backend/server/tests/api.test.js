@@ -22,6 +22,7 @@ const ROW = {
 function fakeRepository(overrides = {}) {
   return {
     search: vi.fn().mockResolvedValue([ROW]),
+    searchText: vi.fn().mockResolvedValue([ROW]),
     findById: vi.fn().mockResolvedValue(ROW),
     list: vi.fn().mockResolvedValue([ROW]),
     listServiceTypes: vi.fn().mockResolvedValue(['Food', 'Housing']),
@@ -38,25 +39,49 @@ beforeEach(() => {
   app = createApp({ repository, logRequests: false });
 });
 
+function fakeAi(overrides = {}) {
+  return {
+    enabled: true,
+    interpret: vi.fn().mockResolvedValue({
+      categories: ['Food'],
+      keywords: ['food', 'bank'],
+      city: 'Surrey',
+      provider: 'gemini',
+    }),
+    explain: vi.fn().mockResolvedValue({
+      explanations: new Map([[8, 'Gives food hampers in Surrey.']]),
+      provider: 'gemini',
+    }),
+    ...overrides,
+  };
+}
+
 describe('POST /api/search', () => {
-  it('returns resource cards with provenance from the database row', async () => {
+  it('without AI, matches the query text in the database and returns cards with provenance', async () => {
     const res = await request(app).post('/api/search').send({ query: 'Food bank in Surrey', city: 'surrey' });
     expect(res.status).toBe(200);
-    expect(res.body.status).toBe('ok');
-    expect(res.body.city).toBe('Surrey');
+    expect(res.body).toMatchObject({
+      status: 'ok',
+      city: 'Surrey',
+      interpreted: null,
+      ai: { interpreted_by: null, explained_by: null },
+    });
     expect(res.body.results[0]).toMatchObject({
       resource_id: 8,
       official_url: 'https://surreyfoodbank.org',
       verification: { status: 'Verified', last_reviewed_at: '2026-09-15T00:00:00.000Z' },
       match_explanation: null,
     });
-    expect(repository.search).toHaveBeenCalledWith(
-      expect.objectContaining({ categories: ['Food'], city: 'Surrey' }),
-    );
+    expect(repository.searchText).toHaveBeenCalledWith({
+      query: 'Food bank in Surrey',
+      city: 'Surrey',
+      limit: 20,
+    });
+    expect(repository.search).not.toHaveBeenCalled();
   });
 
   it('returns the 211 BC message when nothing matches', async () => {
-    repository.search.mockResolvedValue([]);
+    repository.searchText.mockResolvedValue([]);
     const res = await request(app).post('/api/search').send({ query: 'xyzzy' });
     expect(res.status).toBe(200);
     expect(res.body).toMatchObject({
@@ -67,10 +92,75 @@ describe('POST /api/search', () => {
     });
   });
 
-  it('skips the database when the query has no usable words', async () => {
-    const res = await request(app).post('/api/search').send({ query: 'I need help' });
-    expect(res.body.status).toBe('no_results');
-    expect(repository.search).not.toHaveBeenCalled();
+  describe('with AI', () => {
+    let ai;
+    beforeEach(() => {
+      ai = fakeAi();
+      app = createApp({ repository, ai, logRequests: false });
+    });
+
+    it('interprets with database values, searches, and adds the explanations', async () => {
+      const res = await request(app).post('/api/search').send({ query: 'food bank in surrey' });
+      expect(ai.interpret).toHaveBeenCalledWith({
+        query: 'food bank in surrey',
+        serviceTypes: ['Food', 'Housing'],
+        cities: ['Surrey', 'Vancouver'],
+      });
+      expect(repository.search).toHaveBeenCalledWith({
+        categories: ['Food'],
+        keywords: ['food', 'bank'],
+        city: 'Surrey',
+        limit: 20,
+      });
+      expect(res.body).toMatchObject({
+        status: 'ok',
+        city: 'Surrey',
+        interpreted: { categories: ['Food'], keywords: ['food', 'bank'], city: 'Surrey' },
+        ai: { interpreted_by: 'gemini', explained_by: 'gemini' },
+      });
+      expect(res.body.results[0].match_explanation).toBe('Gives food hampers in Surrey.');
+      // The explain step only ever sees rows that came from the database.
+      expect(ai.explain).toHaveBeenCalledWith({ query: 'food bank in surrey', candidates: [ROW] });
+    });
+
+    it('lets the city filter win over a city named in the query', async () => {
+      await request(app).post('/api/search').send({ query: 'food in surrey', city: 'Vancouver' });
+      expect(repository.search).toHaveBeenCalledWith(expect.objectContaining({ city: 'Vancouver' }));
+    });
+
+    it('falls back to database text search when every AI provider fails', async () => {
+      ai.interpret.mockResolvedValue(null);
+      ai.explain.mockResolvedValue(null);
+      const res = await request(app).post('/api/search').send({ query: 'food bank' });
+      expect(repository.searchText).toHaveBeenCalled();
+      expect(ai.explain).not.toHaveBeenCalled();
+      expect(res.body).toMatchObject({
+        status: 'ok',
+        interpreted: null,
+        ai: { interpreted_by: null, explained_by: null },
+      });
+      expect(res.body.results[0].match_explanation).toBeNull();
+    });
+
+    it('returns the cards without explanations when only the explain step fails', async () => {
+      ai.explain.mockResolvedValue(null);
+      const res = await request(app).post('/api/search').send({ query: 'food bank' });
+      expect(res.body.ai).toEqual({ interpreted_by: 'gemini', explained_by: null });
+      expect(res.body.results[0].match_explanation).toBeNull();
+    });
+
+    it('skips the database and the explain step when the AI finds no need', async () => {
+      ai.interpret.mockResolvedValue({ categories: [], keywords: [], city: null, provider: 'gemini' });
+      const res = await request(app).post('/api/search').send({ query: 'hello' });
+      expect(res.body.status).toBe('no_results');
+      expect(repository.search).not.toHaveBeenCalled();
+      expect(ai.explain).not.toHaveBeenCalled();
+    });
+
+    it('does not call the AI for invalid input', async () => {
+      await request(app).post('/api/search').send({ query: '' });
+      expect(ai.interpret).not.toHaveBeenCalled();
+    });
   });
 
   it.each([
@@ -86,6 +176,7 @@ describe('POST /api/search', () => {
     expect(res.status).toBe(400);
     expect(res.body.error.code).toBe(code);
     expect(repository.search).not.toHaveBeenCalled();
+    expect(repository.searchText).not.toHaveBeenCalled();
   });
 
   it('rejects malformed JSON', async () => {
@@ -96,7 +187,7 @@ describe('POST /api/search', () => {
 
   it('hides internal details when the database fails', async () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    repository.search.mockRejectedValue(new Error('connection refused at 10.0.0.5'));
+    repository.searchText.mockRejectedValue(new Error('connection refused at 10.0.0.5'));
     const res = await request(app).post('/api/search').send({ query: 'food' });
     expect(res.status).toBe(503);
     expect(res.body.error.code).toBe('SERVICE_UNAVAILABLE');

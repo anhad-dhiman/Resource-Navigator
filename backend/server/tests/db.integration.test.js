@@ -53,6 +53,25 @@ describe.skipIf(!url)('database integration', () => {
     expect(rows.map((r) => r.service_type)).toContain('Legal Aid');
   });
 
+  it('fallback text search matches any word of a plain-language query', async () => {
+    // PostgreSQL drops the stop words and stems the rest; any remaining word can match.
+    const rows = await repo.searchText({
+      query: "I can't pay rent and I'm running low on food",
+      city: null,
+      limit: 20,
+    });
+    const types = new Set(rows.map((r) => r.service_type));
+    expect(types.has('Food')).toBe(true);
+    const surrey = await repo.searchText({ query: 'food bank', city: 'surrey', limit: 20 });
+    expect(surrey.length).toBeGreaterThan(0);
+    for (const r of surrey) expect(r.city).toBe('Surrey');
+  });
+
+  it('fallback text search returns nothing for stop words or punctuation only', async () => {
+    expect(await repo.searchText({ query: 'the and of', city: null, limit: 20 })).toEqual([]);
+    expect(await repo.searchText({ query: "'); -- !!", city: null, limit: 20 })).toEqual([]);
+  });
+
   it('excludes a resource once its latest review is not Verified (FR9)', async () => {
     const [first] = await repo.search({ categories: ['Housing'], keywords: [], city: null, limit: 1 });
     await pool.query(

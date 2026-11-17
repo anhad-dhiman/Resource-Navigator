@@ -44,8 +44,10 @@ Response `200`, matches found:
   "status": "ok",
   "interpreted": {
     "categories": ["Housing", "Food"],
-    "keywords": ["rent", "food"]
+    "keywords": ["rent", "food", "groceries"],
+    "city": null
   },
+  "ai": { "interpreted_by": "gemini", "explained_by": "gemini" },
   "city": "Surrey",
   "count": 1,
   "results": [
@@ -65,7 +67,7 @@ Response `200`, matches found:
         "status": "Verified",
         "last_reviewed_at": "2026-09-15T00:00:00.000Z"
       },
-      "match_explanation": null
+      "match_explanation": "Provides free food hampers to low-income families in Surrey."
     }
   ]
 }
@@ -76,7 +78,8 @@ Response `200`, no matches (the 211 BC referral):
 ```json
 {
   "status": "no_results",
-  "interpreted": { "categories": [], "keywords": ["xyzzy"] },
+  "interpreted": { "categories": [], "keywords": [], "city": null },
+  "ai": { "interpreted_by": "gemini", "explained_by": null },
   "city": null,
   "count": 0,
   "results": [],
@@ -86,11 +89,28 @@ Response `200`, no matches (the 211 BC referral):
 
 Notes:
 
-- `interpreted` comes from the rule-based interpreter (`services/queryInterpreter.js`), the
-  placeholder for the AI intent step. The AI integration will replace it with the same shape.
-- `match_explanation` is always `null` until the AI explanation step is added.
-- Ordering: resources whose `service_type` matches an interpreted category first, then full-text rank.
-- The query text is never stored or logged.
+How a search runs (`services/searchService.js`, `ai/`):
+
+1. **Interpret.** The AI turns the query into `categories` (chosen only from the service types in
+   the database), `keywords`, and a `city` named in the query (chosen only from the database's
+   cities). The query is sent as a JSON field, never mixed into the instructions.
+2. **Search.** The database returns verified records matching any category or keyword. A city
+   picked in the `city` field wins over a city named in the query.
+3. **Explain.** If there are results, the AI writes `match_explanation` for each card from that
+   record's own fields. Explanations with web addresses, email addresses or numbers of three or
+   more digits are dropped, so the AI can't add contact details.
+
+Providers are tried in order: Gemini, then Groq. `ai.interpreted_by` / `ai.explained_by` name the
+provider that answered, or `null`.
+
+When every provider fails (rate limit, timeout, outage) or no API key is set:
+
+- `interpreted` is `null` and the database matches the query's own words with PostgreSQL full-text
+  search (its built-in English dictionary removes stop words). Results are broader than with the AI.
+- `match_explanation` is `null` on every card, and the explain step is skipped.
+
+The query text is never stored or logged by this API. It is sent to the AI provider; see the
+privacy policy on the About page.
 
 ## GET /api/resources
 

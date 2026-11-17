@@ -14,7 +14,7 @@ function Row({ icon: Icon, children }) {
 
 /**
  * One resource. Every fact shown comes from the database record. The optional
- * match_explanation is reserved for the AI step and is labelled as such.
+ * match_explanation is written by the AI from this record's own fields and is labelled as such.
  */
 export default function ResourceCard({ resource }) {
   const {
@@ -57,7 +57,7 @@ export default function ResourceCard({ resource }) {
         <p className="mt-3 flex gap-2 rounded-lg bg-blue-50 p-3 text-sm text-blue-900">
           <Sparkles className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <span>
-            <span className="font-semibold">Why this matches: </span>
+            <span className="font-semibold">Why this may help (AI summary): </span>
             {match_explanation}
           </span>
         </p>
