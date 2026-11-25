@@ -55,6 +55,8 @@ npm run build
 
 ## Deploying (Vercel)
 
-Set the project root to `frontend`, and set `VITE_API_URL` to the deployed backend URL. Add the
-Vercel domain to the backend's `CORS_ORIGINS`. `vercel.json` sends every route to `index.html`
-so page refreshes on `/resources/8` work.
+See [`../DEPLOY.md`](../DEPLOY.md). In short: set the project root to `frontend`, and put the
+backend's URL in `vercel.json` in place of `YOUR-BACKEND.up.railway.app`. Vercel then forwards
+`/api/*` to the backend, so the browser only ever talks to the Vercel domain: no CORS setup, and
+the admin session cookie works. Leave `VITE_API_URL` empty. `vercel.json` also sends every other
+route to `index.html`, so page refreshes on `/resources/8` work.

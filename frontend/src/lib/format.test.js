@@ -17,6 +17,11 @@ describe('format helpers', () => {
   it('builds tel links and display hosts', () => {
     expect(telHref('(604) 681-4437')).toBe('tel:6046814437');
     expect(telHref('')).toBeNull();
+    expect(telHref('604-660-3511 (toll-free 1-888-664-3344)')).toBe('tel:6046603511');
+    expect(telHref('604-294-5444 (North); 604-307-2945 (South)')).toBe('tel:6042945444');
+    expect(telHref('604-951-1122 ext. 1')).toBe('tel:6049511122');
+    expect(telHref('1-800-665-1185')).toBe('tel:18006651185');
+    expect(telHref('call us')).toBeNull();
     expect(displayHost('https://www.phs.ca/about')).toBe('phs.ca');
   });
 

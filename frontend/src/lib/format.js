@@ -30,8 +30,16 @@ export function safeUrl(url) {
 }
 
 /** "604-876-3601" → "tel:6048763601" */
+// A North American number: optional leading 1, then 3-3-4 digits with any separators.
+const PHONE_NUMBER = /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/;
+
+/**
+ * "604-876-3601" → "tel:6048763601". When a field holds more than one number
+ * ("604-660-3511 (toll-free 1-888-664-3344)"), the first one is dialled.
+ */
 export function telHref(phone) {
-  const digits = (phone || '').replace(/[^\d+]/g, '');
+  const match = (phone || '').match(PHONE_NUMBER);
+  const digits = match ? match[0].replace(/[^\d+]/g, '') : '';
   return digits ? `tel:${digits}` : null;
 }
 

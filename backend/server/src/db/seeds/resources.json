@@ -498,5 +498,1005 @@
       "reviewed_at": "2026-09-15",
       "next_review_due": "2026-10-15"
     }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Richmond House Emergency Shelter (The Salvation Army)",
+      "description": "Year-round, minimal-barrier emergency shelter (60 beds) providing three meals a day, showers, laundry, life skills, employment programs, case management, and referrals for people experiencing homelessness; pet-friendly.",
+      "physical_address": "12040 Horseshoe Way",
+      "city": "Richmond",
+      "contact_phone": "604-276-2490",
+      "official_url": "https://tsasites.salvationarmy.ca/web/belkin-communities-of-hope/services/richmond-house-shelter",
+      "operating_hours": "Open 24/7, year-round; call ahead for bed availability",
+      "eligibility_criteria": "Adult men, women, and transgender individuals experiencing homelessness; priority given to Richmond residents",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, Richmond House Emergency Shelter), The Salvation Army Belkin Communities of Hope program page (salvationarmy.ca), and City of Richmond shelters page (richmond.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "The Salvation Army Richmond Community and Family Services",
+      "description": "Provides emergency food hampers, clothing, household goods, lay counselling, and a free weeknight mobile food truck for vulnerable individuals and families in Richmond.",
+      "physical_address": "8280 Gilbert Road (Richmond Community Church)",
+      "city": "Richmond",
+      "contact_phone": "604-277-2424",
+      "official_url": "https://salvationarmyrichmond.ca",
+      "operating_hours": "Office Tue-Fri 2pm-5pm; food bank Wed 10am-12pm; mobile food truck Mon-Fri 7pm-9pm at 5800 Cedarbridge Way",
+      "eligibility_criteria": "Vulnerable individuals and families in Richmond; photo ID for each household member required at first food bank visit; mobile food truck open to all",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, Community and Family Services - Richmond) and Richmond School District 'No or Low Cost Community Meals and Food Programs' list (sd38.bc.ca, July 2026); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Chimo Community Services - Family Law Advocacy",
+      "description": "Legal advocates provide free information, advice, referrals, and representation where appropriate for low-income clients on family law matters including separation, support, parenting time, and child protection.",
+      "physical_address": "120-7000 Minoru Boulevard (Richmond Caring Place)",
+      "city": "Richmond",
+      "contact_phone": "604-279-7077",
+      "official_url": "https://www.chimoservices.com/advocacy/family-law-advocacy",
+      "operating_hours": "Mon-Fri 9am-4:30pm; call to book an appointment",
+      "eligibility_criteria": "Low-income clients residing in Richmond, Vancouver, New Westminster, Delta, Tsawwassen, or Surrey",
+      "language_support": "Cantonese, English, Farsi, French, Hindi, Mandarin, Punjabi, Spanish, Urdu"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Clicklaw HelpMap listing (clicklaw.bc.ca, Family Law Advocacy Service) and 211 BC listing (bc.211.ca, Family Law Advocacy); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Richmond Community Mental Health and Substance Use - Central Intake (Vancouver Coastal Health)",
+      "description": "Single point of access for publicly funded mental health and substance use care in Richmond, including assessment, counselling, treatment, education, and referral to specialty services.",
+      "physical_address": "620-8100 Granville Avenue (Richmond Place)",
+      "city": "Richmond",
+      "contact_phone": "604-204-1111",
+      "official_url": "https://www.vch.ca/en/location-service/richmond-community-mhsu-central-intake-8100-granville-avenue",
+      "operating_hours": "Phone Mon-Fri 8:30am-6pm; adult drop-in Mon-Fri 9:30am-12pm and 1pm-3:30pm; child/youth drop-in Tue 2pm-4pm",
+      "eligibility_criteria": "Children, youth, adults, and older adults who live or stay in Richmond; no referral needed for intake (some services require a physician/NP referral)",
+      "language_support": "English, Cantonese, Mandarin; free interpreting in other languages"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Vancouver Coastal Health official location page (vch.ca) and 211 BC listing (bc.211.ca, Mental Health and Substance Use Services Intake - Richmond); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Richmond Cares, Richmond Gives - Seniors Community Support Services",
+      "description": "Provides free information and referral, peer counselling, grocery shopping and delivery, and Better at Home services (friendly visiting, transportation, light housekeeping) to help Richmond seniors stay independent.",
+      "physical_address": "190-7000 Minoru Boulevard (Richmond Caring Place)",
+      "city": "Richmond",
+      "contact_phone": "604-279-7020",
+      "official_url": "https://www.rcrg.org/WhatWeDo/RCRGPrograms/seniors-community-support-services",
+      "operating_hours": "Office Mon-Fri 9am-5pm",
+      "eligibility_criteria": "Richmond residents 60+ (55+ with a chronic health condition or disability); many services free, transportation and housekeeping on an income-based sliding scale",
+      "language_support": "Multilingual information and referral; Better at Home transportation in Cantonese, English, French, Hindi, Mandarin, Punjabi"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Richmond Cares, Richmond Gives official program page (rcrg.org) and 211 BC agency listing (bc.211.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Surrey Urban Mission Society (SUMS)",
+      "description": "Operates low-barrier 24-hour emergency and transitional shelters (SUMS Place, The Cove, Olive Branch) with free daily meals, showers, laundry, and caseworkers who help with housing search, income assistance, and ID.",
+      "physical_address": "10776 King George Boulevard",
+      "city": "Surrey",
+      "contact_phone": "604-581-5172",
+      "official_url": "https://www.sumsplace.ca",
+      "operating_hours": "Office daily 8am-4pm; free bagged breakfast 8:30am-9:30am and lunch 12:30pm-1:30pm daily at SUMS Place; shelter intake/referral through Surrey Welcome Hub (13545 King George Blvd, 604-585-1023)",
+      "eligibility_criteria": "Adults 19+ experiencing homelessness; The Cove and Olive Branch by referral through the Surrey Welcome Hub",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca, Surrey Urban Mission Society), SUMS official site (sumsplace.ca), and Fraser Northwest Pathways listing; re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "The Salvation Army Surrey Community and Family Services",
+      "description": "Provides emergency food, clothing, furniture referrals, and connections to other social services for individuals and families in need in Surrey.",
+      "physical_address": "13474 96th Avenue",
+      "city": "Surrey",
+      "contact_phone": "604-496-5172",
+      "official_url": "https://tsasites.salvationarmy.ca/web/surrey-ministries/programs/community-assistance",
+      "operating_hours": "Food distribution for registered clients Thu 10am-12pm; call office for appointments",
+      "eligibility_criteria": "Registered clients; registration currently waitlisted (contact office)",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "The Salvation Army Surrey Ministries official community assistance page (salvationarmy.ca) and 211 BC listing (bc.211.ca, Food Programs - Surrey); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Sources Community Law Clinic",
+      "description": "Pro bono legal clinic led by lawyers and advocates offering advice and representation, mainly to low-income people, on income and disability assistance, tenancy, employment, WorkSafeBC, human rights, and debt.",
+      "physical_address": "105-13771 72A Avenue (Legal Resource Centre)",
+      "city": "Surrey",
+      "contact_phone": "778-735-1368",
+      "official_url": "https://www.sourcesbc.ca/our-services/community-law-clinic/",
+      "operating_hours": "Mon-Fri 9am-4pm",
+      "eligibility_criteria": "Mainly low-income individuals",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, Sources Community Law Clinic) and Legal Aid BC referral page (legalaid.bc.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Surrey Mental Health and Substance Use Centre (Fraser Health)",
+      "description": "Publicly funded centre offering assessment, short-term treatment, individual and group therapy, crisis intervention, primary care for mental health and substance use, and referrals to supportive housing.",
+      "physical_address": "1100-13401 108th Avenue (Station Tower, Gateway SkyTrain)",
+      "city": "Surrey",
+      "contact_phone": "604-953-4900",
+      "official_url": "https://www.fraserhealth.ca/Service-Directory/Locations/Surrey/surrey-mental-health-centre",
+      "operating_hours": "Mon-Sun 8am-8pm",
+      "eligibility_criteria": "Adults 19+ in Surrey experiencing mental illness and/or substance use problems; self-referral accepted",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Fraser Health Service Directory (fraserhealth.ca) and 211 BC listing (bc.211.ca, Mental Health and Substance Use Centre - Surrey); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Progressive Intercultural Community Services (PICS) - Better at Home Surrey/Whalley",
+      "description": "Provides non-medical home support for older adults, including grocery shopping, transportation, light housekeeping, yard work, and friendly visits, delivered by screened volunteers.",
+      "physical_address": "205-12725 80th Avenue",
+      "city": "Surrey",
+      "contact_phone": "604-596-7722",
+      "official_url": "https://pics.bc.ca/free-programs-services/better-at-home/",
+      "operating_hours": "Office Mon-Fri 9am-4:30pm",
+      "eligibility_criteria": "Seniors 65+ in general good health living independently in Whalley, Cloverdale, Fleetwood, and Guildford; home intake assessment required; sliding-scale fees",
+      "language_support": "English, Punjabi, Hindi (transportation service)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "PICS official Better at Home page (pics.bc.ca) and 211 BC listing (bc.211.ca, Better at Home - Surrey/Whalley); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Covenant House Vancouver",
+      "description": "Provides 24/7 crisis shelter, low-barrier Sanctuary housing, a drop-in centre with meals, and housing support workers for youth experiencing or at risk of homelessness.",
+      "physical_address": "1280 Seymour Street",
+      "city": "Vancouver",
+      "contact_phone": "604-685-7474",
+      "official_url": "https://www.covenanthousebc.org",
+      "operating_hours": "Open 24/7, 365 days; drop-in Mon-Fri 9am-5:30pm; admin office Mon-Fri 9:30am-4:30pm",
+      "eligibility_criteria": "Youth ages 16-24 experiencing or at risk of homelessness; self-referral accepted",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca, Covenant House Vancouver) and Covenant House Vancouver official site (covenanthousebc.org/our-story); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "The Door is Open (Catholic Charities)",
+      "description": "Downtown Eastside drop-in centre serving free daily meals and snacks, plus clothing, blankets, counselling, and housing and employment referrals.",
+      "physical_address": "255 Dunlevy Avenue",
+      "city": "Vancouver",
+      "contact_phone": "604-669-0498",
+      "official_url": "https://thedoorisopen.ca",
+      "operating_hours": "Daily 11am-5pm; lunch 11am Mon-Tue and Thu-Sat, 11:30am Sun; Wednesday women-only: breakfast 8:30am, lunch 10:30am",
+      "eligibility_criteria": "Adults in the Downtown Eastside; Wednesdays are women-only",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, The Door is Open), Catholic Charities page (support.rcav.org), and Providence Health Care DTES resource booklet (2025); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Rise Women's Legal Centre",
+      "description": "Community legal centre providing low-cost and free legal services, primarily in family law, for self-identifying women and gender-diverse people who cannot afford a lawyer but do not qualify for legal aid.",
+      "physical_address": "516 Richards Street",
+      "city": "Vancouver",
+      "contact_phone": "236-317-9000",
+      "official_url": "https://womenslegalcentre.ca",
+      "operating_hours": "Phone/online intake only (intake line voicemail or online request form); services by appointment",
+      "eligibility_criteria": "Self-identified women and gender-diverse people who cannot afford a lawyer and do not qualify for legal aid; Lower Mainland clients served through the Community Legal Clinic",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Rise Women's Legal Centre official site (womenslegalcentre.ca), 211 BC agency listing (bc.211.ca), and Clicklaw HelpMap (clicklaw.bc.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Downtown Community Health Centre (Vancouver Coastal Health)",
+      "description": "Vancouver Coastal Health centre offering primary care, addiction and mental health services, opioid replacement therapy, nutrition care, and integrated care teams for Downtown Eastside residents.",
+      "physical_address": "569 Powell Street",
+      "city": "Vancouver",
+      "contact_phone": "604-255-3151",
+      "official_url": "https://vch.ca/en/location/downtown-community-health-centre/about",
+      "operating_hours": "Mon-Sun 9am-6pm; Women's Night Drop-in Tue 5pm-8pm",
+      "eligibility_criteria": "Services free for people living in the Downtown Eastside and Strathcona area, with a focus on those facing barriers to care",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Vancouver Coastal Health official location pages (vch.ca, About and Plan Your Visit); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Seniors First BC",
+      "description": "Provides information, advocacy, victim services, and pro bono legal help (Elder Law Clinic) for older adults facing abuse, neglect, or legal issues, plus the Seniors Abuse and Information Line (SAIL).",
+      "physical_address": "310-1281 West Georgia Street",
+      "city": "Vancouver",
+      "contact_phone": "604-437-1940",
+      "official_url": "https://seniorsfirstbc.ca",
+      "operating_hours": "SAIL Mon-Fri 8am-8pm; office Mon-Fri 9am-4:30pm, client meetings by appointment only",
+      "eligibility_criteria": "Older adults 55+ residing in BC; legal representation subject to income/asset assessment at intake",
+      "language_support": "Language interpretation available through SAIL"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Seniors First BC official site (seniorsfirstbc.ca, Elder Law Clinic, SAIL and contact pages); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Purpose Society - New Westminster Homeless Shelter",
+      "description": "Low-barrier shelter (40 beds for men, 10 for women, couples accommodated) with a bed reservation system, daily meals, and referrals to health and harm reduction services.",
+      "physical_address": "502 Columbia Street",
+      "city": "New Westminster",
+      "contact_phone": "604-375-5792",
+      "official_url": "https://purposesociety.org",
+      "operating_hours": "Moving from nightly 8pm-8am to 24/7 operation under 2026 HEART & HEARTH funding (City of New Westminster, Feb 9, 2026); call to confirm current hours",
+      "eligibility_criteria": "Adults experiencing homelessness; bed reservation system (no line-ups); pets allowed",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, New Westminster Homeless Shelter - Lower Mainland Purpose Society) and City of New Westminster news release (newwestcity.ca, Feb 9, 2026); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Don't Go Hungry: A Food Support Program",
+      "description": "Volunteer-run program distributing free grocery hampers to people in need at several New Westminster church and community sites on Saturdays.",
+      "physical_address": "1320 Seventh Avenue (Trinity Presbyterian Church West End)",
+      "city": "New Westminster",
+      "contact_phone": "604-521-4242",
+      "official_url": "https://www.dontgohungry.ca",
+      "operating_hours": "Saturdays: West End 12:30pm-1:30pm; Queensborough Community Centre 12:45pm-1:15pm; Sapperton (322 Hospital St) 1pm-1:30pm",
+      "eligibility_criteria": "People in need in New Westminster and nearby areas; new clients register on site (arrive 45-60 minutes early); bring ID and proof of address to register",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca, Don't Go Hungry), Burnaby Public Library food resources page (bpl.bc.ca, updated July 7, 2026), and Greater Vancouver Food Bank referral list (foodbank.bc.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Elizabeth Fry Society of Greater Vancouver - Poverty Law Clinic",
+      "description": "Legal advocates provide free legal information, benefits assistance, and advocacy on rental disputes, evictions, debt, bankruptcy, employment standards, mental health, and access to income programs.",
+      "physical_address": "402 East Columbia Street",
+      "city": "New Westminster",
+      "contact_phone": "604-520-1166",
+      "official_url": "https://efry.com",
+      "operating_hours": "Mon-Fri 8:30am-4:30pm (drop-in or call for appointment)",
+      "eligibility_criteria": "Free service; EFry primarily serves women, girls, and youth",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, Law Clinic - Elizabeth Fry Society of Greater Vancouver), Clicklaw HelpMap (clicklaw.bc.ca), and EFry official site (efry.com); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "New Westminster Mental Health Centre (Fraser Health)",
+      "description": "Publicly funded centre offering assessment, short-term treatment, individual and group therapy, assertive community treatment, family support, older adult mental health, and crisis intervention.",
+      "physical_address": "403 Sixth Street, 2nd Floor",
+      "city": "New Westminster",
+      "contact_phone": "604-777-6800",
+      "official_url": "https://www.fraserhealth.ca/Service-Directory/Locations/New-Westminster/new-westminster-mental-health-centre",
+      "operating_hours": "Mon-Fri 8:30am-4:30pm",
+      "eligibility_criteria": "Adults 19+ experiencing mental illness and/or substance use problems; self-referral accepted; intake and assessment also available through the MHSU Wellness Centre at Royal Columbian Hospital",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Fraser Health Service Directory (fraserhealth.ca) and 211 BC listing (bc.211.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Seniors Services Society of BC",
+      "description": "Provides seniors' housing navigation, homelessness prevention and outreach, emergency loans, temporary housing, social outings, and tax and form completion help.",
+      "physical_address": "750 Carnarvon Street",
+      "city": "New Westminster",
+      "contact_phone": "604-520-6621",
+      "official_url": "https://www.seniorsservicessociety.ca",
+      "operating_hours": "Office Mon-Fri 8:30am-12:30pm and 1pm-4:30pm",
+      "eligibility_criteria": "Seniors 60+; housing services free across Metro Vancouver, social programs for New Westminster seniors (low-cost membership optional)",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, Social Programs and Support Services) and Fraser Northwest Pathways listing (Housing Services for Seniors); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Progressive Housing Society - Douglas Shelter",
+      "description": "24-hour emergency shelter (40 beds) providing meals, toiletries, showers, laundry, and connections to counselling, health services, and long-term housing.",
+      "physical_address": "2294 Douglas Road",
+      "city": "Burnaby",
+      "contact_phone": "604-522-9669",
+      "official_url": "https://www.progressivehousing.net/service/emergency-shelter",
+      "operating_hours": "Open 24/7, year-round; intake 10am-10pm, first-come first-served",
+      "eligibility_criteria": "Adults experiencing homelessness, all genders; priority to Burnaby residents; pets accepted",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "City of Burnaby shelters page (burnaby.ca) and 211 BC listing (bc.211.ca, Douglas Shelter); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Burnaby Neighbourhood House - North and South Food Hubs",
+      "description": "Provides free food hampers and grocery gift cards to low-income residents, prepared meals for low-income seniors, and grocery delivery for residents who cannot get out.",
+      "physical_address": "4908 Hastings Street (North House); 5024 Rumble Street (South Hub)",
+      "city": "Burnaby",
+      "contact_phone": "604-294-5444 (North); 604-307-2945 (South)",
+      "official_url": "https://burnabynh.ca",
+      "operating_hours": "North Hub pick-up Thu 10am-1pm; South Hub (5024 Rumble St) pick-up Wed 12pm-4pm; agency office Mon-Fri 9am-4:30pm",
+      "eligibility_criteria": "Low-income Burnaby residents; currently at capacity and not accepting new registrations at either location; emergency one-time hampers available by stopping in",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca, Burnaby Neighbourhood House Society) and Burnaby Public Library food resources page (bpl.bc.ca, updated July 7, 2026); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Burnaby Family Life - Legal Advocacy",
+      "description": "Legal advocates provide free and confidential legal information, advocacy, and referrals in poverty (community) law and family law, with interpretation available.",
+      "physical_address": "102-2101 Holdom Avenue (Holdom Resource Centre)",
+      "city": "Burnaby",
+      "contact_phone": "604-659-2200",
+      "official_url": "https://www.burnabyfamilylife.org",
+      "operating_hours": "Agency office Mon-Fri 7:30am-5:30pm",
+      "eligibility_criteria": "Qualifying low- and modest-income residents; poverty law for Burnaby residents, family law advocacy also for New Westminster and Vancouver residents",
+      "language_support": "Several languages through an interpretation partnership"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Law Foundation of BC article 'Helping Burnaby Families with Legal Advocacy' (lawfoundationbc.org), Clicklaw listing (clicklaw.bc.ca), and 211 BC agency listing (bc.211.ca, Burnaby Family Life); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Burnaby Community Mental Health and Substance Use Centre (Fraser Health)",
+      "description": "Publicly funded centre offering short-term assessment and treatment, a rapid access clinic, primary care for mental health and substance use, group therapy, clubhouse programs, and older adult mental health.",
+      "physical_address": "100-4940 Canada Way",
+      "city": "Burnaby",
+      "contact_phone": "604-453-1900",
+      "official_url": "https://fraserhealth.ca/Service-Directory/Locations/Burnaby/burnaby-mental-health-centre",
+      "operating_hours": "Mon-Fri 8:30am-4:30pm",
+      "eligibility_criteria": "Adults 19+ experiencing mental illness and/or substance use problems; self-referral accepted",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Fraser Health Service Directory (fraserhealth.ca); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "City of Burnaby Citizen Support Services (Better at Home)",
+      "description": "Provides non-medical support for Burnaby seniors, including light housekeeping and medical transportation (Better at Home), phone buddies, volunteer visitors, shopping help, and lunch programs.",
+      "physical_address": "1202-3713 Kensington Avenue (Christine Sinclair Community Centre)",
+      "city": "Burnaby",
+      "contact_phone": "604-294-7980",
+      "official_url": "https://www.burnaby.ca/services-and-payments/seniors-and-family-support/services-for-burnaby-seniors",
+      "operating_hours": "Not specified in source listings; contact agency",
+      "eligibility_criteria": "Burnaby residents aged 65+; housekeeping and transportation fees on an income-based sliding scale with subsidies available",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "City of Burnaby official seniors services page (burnaby.ca) and Burnaby Pathways listing (Seniors Services - Burnaby); re-verified Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Aster Place Supportive Housing (Community Builders)",
+      "description": "40 self-contained temporary supportive homes for people experiencing homelessness, staffed 24/7, with meals and support services; pet-friendly and wheelchair accessible.",
+      "physical_address": "2520 Smith Street",
+      "city": "Richmond",
+      "contact_phone": "604-370-0076",
+      "official_url": "https://communitybuilders.ca/our-sites/aster-place",
+      "operating_hours": "Staffed 24/7",
+      "eligibility_criteria": "People experiencing homelessness in Richmond; applications through BC Housing",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Community Builders official site page (communitybuilders.ca), City of Richmond shelters and housing page (richmond.ca), and 211 BC listing (bc.211.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Richmond Presbyterian Church - Monday Community Meal",
+      "description": "Free sit-down community dinner, open to all.",
+      "physical_address": "7111 No. 2 Road",
+      "city": "Richmond",
+      "contact_phone": "604-277-5410",
+      "official_url": "https://www.richmond.ca/__shared/assets/noorlowcostcommunitymealsandfoodprograms62706.pdf",
+      "operating_hours": "Mondays 5pm-6pm (including statutory and provincial holidays)",
+      "eligibility_criteria": "All are welcome; no cost",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "City of Richmond 'No or Low Cost Community Meals and Food Programs' list (richmond.ca, maintained with Richmond Food Bank) and Richmond School District copy (sd38.bc.ca, July 2026), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Richmond Family Justice Centre (Province of BC)",
+      "description": "Free provincial family justice services: mediation, parenting and support agreements, information and referrals for families going through separation or divorce.",
+      "physical_address": "215-7577 Elmbridge Way",
+      "city": "Richmond",
+      "contact_phone": "604-660-3511 (toll-free 1-888-664-3344)",
+      "official_url": "https://www2.gov.bc.ca/gov/content/life-events/divorce/family-justice/who-can-help/family-justice-centres/locations/richmond",
+      "operating_hours": "Virtual services only, by appointment (no drop-ins): Mon, Wed, Thu 8:30am-5:15pm; Tue 8:30am-7pm",
+      "eligibility_criteria": "Parents and family members going through separation or divorce; free",
+      "language_support": "English (interpretation can be arranged)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Government of British Columbia Family Justice Centre locations page (gov.bc.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Pathways Clubhouse",
+      "description": "Psychosocial rehabilitation clubhouse offering work-ordered day, employment, education, housing support, and social programs for adults living with mental illness.",
+      "physical_address": "8111 Granville Avenue",
+      "city": "Richmond",
+      "contact_phone": "604-276-8834",
+      "official_url": "https://pathwaysclubhouse.com",
+      "operating_hours": "Not specified in source listings; contact agency",
+      "eligibility_criteria": "Adults living with mental illness; free membership; self-referral accepted",
+      "language_support": "English; Chinese mutual-aid group in Mandarin"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Pathways Clubhouse official site (pathwaysclubhouse.com), Pathways BC directory, and City of Richmond community resources list (richmond.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Seniors Centre at Minoru Centre for Active Living (City of Richmond / Minoru Seniors Society)",
+      "description": "Seniors centre with fitness, social and wellness programs, low-cost take-away meals, and Wellness Connections outreach for isolated seniors.",
+      "physical_address": "7191 Granville Avenue",
+      "city": "Richmond",
+      "contact_phone": "604-238-8450",
+      "official_url": "https://www.minorucentre.ca",
+      "operating_hours": "Mon-Fri 8am-9pm; Sat, Sun and holidays 8am-5pm; low-cost meals Mon-Fri 11am-1:30pm",
+      "eligibility_criteria": "Adults 55+; low-income subsidy available for some programs",
+      "language_support": "English, Cantonese, Mandarin (Wellness Connections)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "City of Richmond official site (richmond.ca), Minoru Centre official site (minorucentre.ca), and City of Richmond community meals list (Nov 2025), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Phoenix Society - Post-Treatment Transitional Housing",
+      "description": "Furnished studio units with recovery support for men and women who have completed a structured addiction recovery program; stays up to 2 years.",
+      "physical_address": "13670 94A Avenue (Quibble Creek Building)",
+      "city": "Surrey",
+      "contact_phone": "604-951-1122 ext. 1",
+      "official_url": "https://phoenixsociety.com",
+      "operating_hours": "Call intake line for availability",
+      "eligibility_criteria": "Adults who have completed at least 3 months of a structured recovery program; self-referral accepted; fees up to $475/month",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca), Fraser Northwest Pathways listing, and City of Surrey Non-Market Housing Inventory (surrey.ca, June 2026), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Cloverdale Community Kitchen (Storehouse Community Hub Society)",
+      "description": "Free weekday community dinners, plus a regional food bank and low-cost mobile meals.",
+      "physical_address": "5337 180 Street",
+      "city": "Surrey",
+      "contact_phone": "778-617-3000",
+      "official_url": "https://storehousesociety.ca",
+      "operating_hours": "Free dinners Mon-Fri (except holidays), doors 5:45pm-6:45pm; food bank Mon-Thu 11am-12:30pm and Wed 5pm-6:30pm; office Mon-Thu 9am-4pm",
+      "eligibility_criteria": "Individuals and families in need; food bank requires online registration (waitlist may apply)",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca), Surrey Libraries community resources (surreylibraries.ca), and CanadaHelps charity profile, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Surrey Justice Access Centre (Province of BC)",
+      "description": "Free provincial family justice services, early resolution and mediation, with limited legal advice from on-site Legal Aid BC lawyers.",
+      "physical_address": "3rd Floor, 14340 57th Avenue (Surrey Provincial Courthouse)",
+      "city": "Surrey",
+      "contact_phone": "604-501-3100 (Early Resolution 604-501-8282)",
+      "official_url": "https://www2.gov.bc.ca/gov/content/life-events/divorce/family-justice/who-can-help/justice-access-centres/locations/surrey",
+      "operating_hours": "Weekdays; hours subject to change (call before dropping in)",
+      "eligibility_criteria": "Residents of Surrey, Langley, North Delta, and White Rock with family or civil law issues",
+      "language_support": "English (interpretation can be arranged)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Government of British Columbia Justice Access Centre page (gov.bc.ca), 211 BC listing (bc.211.ca), and JAC brochure, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Foundry Surrey Central (Pacific Community Resources Society)",
+      "description": "Integrated youth health centre offering mental health and substance use support, primary care, peer support, and employment services.",
+      "physical_address": "10280 City Parkway",
+      "city": "Surrey",
+      "contact_phone": "604-813-1250",
+      "official_url": "https://foundrybc.ca/centre/surrey",
+      "operating_hours": "Mon-Fri 10am-7pm",
+      "eligibility_criteria": "Youth aged 12-24 and their caregivers; free and confidential; no referral needed",
+      "language_support": "Arabic, Cantonese, Dari, English, Farsi, French, Hindi, Mandarin, Punjabi, Spanish, Tagalog, Urdu"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Foundry BC centre page (foundrybc.ca), HealthLink BC directory, and BC Government news release (news.gov.bc.ca, Nov 2025), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "DIVERSEcity Better at Home - Surrey/Newton",
+      "description": "Non-medical home support for seniors including light housekeeping, transportation, grocery shopping, friendly visiting, and minor home repairs.",
+      "physical_address": "13455 76th Avenue",
+      "city": "Surrey",
+      "contact_phone": "604-507-2266",
+      "official_url": "https://www.dcrs.ca/our-services/services-for-seniors/better-at-home",
+      "operating_hours": "Mon-Fri 9am-4:30pm",
+      "eligibility_criteria": "Seniors 65+ in general good health living in Newton; sliding-scale fees",
+      "language_support": "English; housekeeping may be available in Hindi or Punjabi"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "DIVERSEcity official site (dcrs.ca) and 211 BC listing (bc.211.ca, Better at Home - Surrey/Newton), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "The Kettle Society - Housing Services",
+      "description": "Supported and semi-independent living programs with rent subsidy and community living support for adults with serious and persistent mental illness.",
+      "physical_address": "1784 East Hastings Street",
+      "city": "Vancouver",
+      "contact_phone": "604-251-2801",
+      "official_url": "https://www.thekettle.ca",
+      "operating_hours": "Office Mon-Thu 9am-12pm and 1pm-5pm",
+      "eligibility_criteria": "Adults with a mental health disability; referral required from Vancouver Coastal Health Mental Health and Substance Use Supported Housing (MHSUSH)",
+      "language_support": "English; Punjabi or Spanish may be available depending on staffing"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC agency listing (bc.211.ca, The Kettle Society) and Kettle Society official site (thekettle.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Evelyne Saller Centre (City of Vancouver)",
+      "description": "City-run Downtown Eastside centre with a low-cost cafeteria, free showers and laundry, and recreation programs.",
+      "physical_address": "404 Alexander Street",
+      "city": "Vancouver",
+      "contact_phone": "604-665-3075",
+      "official_url": "https://vancouver.ca/parks-recreation-culture/evelyne-saller-centre.aspx",
+      "operating_hours": "Cafeteria daily 10am-5:50pm; centre Mon-Fri 9am-8pm, Sat-Sun 10am-8pm",
+      "eligibility_criteria": "Low-income Downtown Eastside residents",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "City of Vancouver official Evelyne Saller Centre pages (vancouver.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "Tenant Resource & Advisory Centre (TRAC)",
+      "description": "Free legal information and education for tenants in BC, with Housing Law Clinic representation for eligible tenants.",
+      "physical_address": "150-900 Howe Street",
+      "city": "Vancouver",
+      "contact_phone": "604-255-0546 (toll-free 1-800-665-1185)",
+      "official_url": "https://tenants.bc.ca",
+      "operating_hours": "Tenant Infoline: Mon, Tue, Thu 1pm-5pm; Wed 4:30pm-7:30pm; Fri 9am-1pm",
+      "eligibility_criteria": "Residential tenants in BC; representation subject to eligibility",
+      "language_support": "English; interpreters available by phone"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "TRAC official site (tenants.bc.ca) and 211 BC listing (bc.211.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Pender Community Health Centre (Vancouver Coastal Health)",
+      "description": "Primary care, addiction services, and hepatitis C program for Downtown Eastside, Gastown and Strathcona residents.",
+      "physical_address": "59 West Pender Street",
+      "city": "Vancouver",
+      "contact_phone": "604-669-9181",
+      "official_url": "https://vch.ca/en/location/pender-community-health-centre/plan-your-visit",
+      "operating_hours": "Mon-Wed and Fri 9am-6pm; Thu 9am-8pm (4:30pm-8pm women and gender-diverse people only)",
+      "eligibility_criteria": "Residents of the Downtown Eastside, Gastown and Strathcona without a family doctor; free",
+      "language_support": "English, French, Spanish, Cantonese"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Vancouver Coastal Health official location page (vch.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Collingwood Neighbourhood House - Better at Home (Renfrew-Collingwood)",
+      "description": "Non-medical home support for seniors including light housekeeping, free grocery delivery, subsidized frozen meals, and social outings.",
+      "physical_address": "5288 Joyce Street",
+      "city": "Vancouver",
+      "contact_phone": "604-435-0323",
+      "official_url": "https://www.cnh.bc.ca",
+      "operating_hours": "Mon-Fri 9am-5pm",
+      "eligibility_criteria": "Seniors 55+ living between Broadway and E 41st Ave and between Boundary Rd and Victoria Dr; sliding scale with subsidy",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Collingwood Neighbourhood House official site (cnh.bc.ca) and 211 BC listing (bc.211.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "CMHA Vancouver-Fraser - New Westminster Housing Programs",
+      "description": "Transitional housing, community living support, and Supported Independent Living rent subsidy for adults with mental illness.",
+      "physical_address": "233-610 Sixth Street",
+      "city": "New Westminster",
+      "contact_phone": "604-516-8080",
+      "official_url": "https://vancouver-fraser.cmha.bc.ca",
+      "operating_hours": "Office Mon-Fri 9am-4:30pm",
+      "eligibility_criteria": "Adults with mental illness who are clients of the New Westminster Mental Health and Substance Use Access Team",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca), HelpStartsHere directory, Fraser Northwest Pathways, and CMHA Vancouver-Fraser official site, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Holy Trinity Cathedral - Saturday Community Brunch",
+      "description": "Free Saturday hot brunch (entrée, fruit, juice, hot drinks) served in the Parish Hall, or as a take-away bagged brunch.",
+      "physical_address": "514 Carnarvon Street",
+      "city": "New Westminster",
+      "contact_phone": "604-521-2511",
+      "official_url": "https://holytrinitycathedral.ca",
+      "operating_hours": "Saturdays; meal served 11am-12pm",
+      "eligibility_criteria": "Anyone in need of food; no registration listed",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Holy Trinity Cathedral official events page (holytrinitycathedral.ca, 2026 listing) and Fraser Northwest Pathways listing, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Legal Aid",
+      "service_name": "New Westminster Family Justice Centre (Province of BC)",
+      "description": "Free provincial family justice services: mediation, parenting and support agreements, information and referrals.",
+      "physical_address": "204-88 10th Street (Columbia Square Plaza)",
+      "city": "New Westminster",
+      "contact_phone": "604-660-8636 (toll-free 1-888-640-3344)",
+      "official_url": "https://www2.gov.bc.ca/gov/content/life-events/divorce/family-justice/who-can-help/family-justice-centres/locations/new-westminster",
+      "operating_hours": "Mon-Fri 8am-5:15pm (some days virtual only; virtual until 7pm on alternating Mon/Wed by appointment)",
+      "eligibility_criteria": "Families going through separation or divorce in New Westminster, Burnaby, and Richmond areas; free",
+      "language_support": "English (interpretation can be arranged)"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Government of British Columbia Family Justice Centre locations page (gov.bc.ca) and 211 BC listing (bc.211.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "New Leaf Clubhouse (Fraserside Community Services Society)",
+      "description": "Psychosocial rehabilitation clubhouse offering a work-ordered day, social and recreation programs, and a young adults group.",
+      "physical_address": "1115 Sixth Avenue",
+      "city": "New Westminster",
+      "contact_phone": "604-526-1007",
+      "official_url": "https://newleafclubhouse.com",
+      "operating_hours": "Mon-Wed and Fri 9am-4pm; Thu 9am-1pm (Young Adults group Thu afternoons)",
+      "eligibility_criteria": "Adults 19-65 with serious or persistent mental illness living in or near New Westminster; referral via clubhouse supervisor or New Westminster Mental Health case manager",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "New Leaf Clubhouse official site (newleafclubhouse.com), Fraser Northwest Pathways, and 211 BC listing (bc.211.ca), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "Vital Connections (Family Services of Greater Vancouver)",
+      "description": "Free, confidential counselling for older adults dealing with isolation, grief, depression, anxiety, and life transitions.",
+      "physical_address": "200-601 Sixth Street",
+      "city": "New Westminster",
+      "contact_phone": "604-525-9144 ext. 2",
+      "official_url": "https://fsgv.ca",
+      "operating_hours": "By appointment; in person and online",
+      "eligibility_criteria": "Adults 50+ living in New Westminster; self or physician referral",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Fraser Northwest Pathways listing, City of New Westminster Century House page (newwestcity.ca), and HelpStartsHere directory, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Dixon Transition Society - Dixon Transition House",
+      "description": "Confidential 10-bed transition house for women and children fleeing violence, plus second- and third-stage housing (Wenda's Place).",
+      "physical_address": "Confidential location (mailing: 204-2101 Holdom Avenue)",
+      "city": "Burnaby",
+      "contact_phone": "604-298-3454",
+      "official_url": "https://dixonsociety.ca",
+      "operating_hours": "24-hour phone line",
+      "eligibility_criteria": "Women, with or without children (boys up to 12), fleeing violence; priority to Burnaby women; stays up to 30 days; self-referral accepted; pets case by case",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca, Dixon Transition House), City of Burnaby community resources page (burnaby.ca), and Fraser Northwest Pathways, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Food",
+      "service_name": "Ryan's Rainbow Emergency Food Outreach",
+      "description": "Volunteer-run emergency food hampers for people in need in Burnaby, no questions asked.",
+      "physical_address": "1600 Cliff Avenue (Cliff Avenue United Church, basement)",
+      "city": "Burnaby",
+      "contact_phone": "604-761-4357",
+      "official_url": "https://www.canadahelps.org/en/charities/ryans-rainbow-emergency-food-outreach-society",
+      "operating_hours": "Thursdays 11am-3pm; call ahead",
+      "eligibility_criteria": "People in need in Burnaby; no questions asked",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Burnaby Public Library food resources page (bpl.bc.ca, updated July 7, 2026), City of Burnaby community resources page (burnaby.ca), CanadaHelps charity profile, and Burnaby Beacon, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Health",
+      "service_name": "Burnaby Hospice Society",
+      "description": "Free palliative and bereavement support, including grief counselling, support groups, and companion visiting for people facing life-limiting illness and their families.",
+      "physical_address": "4535 Kingsway",
+      "city": "Burnaby",
+      "contact_phone": "604-520-5087",
+      "official_url": "https://burnabyhospice.org",
+      "operating_hours": "Office Mon-Fri 9am-4pm",
+      "eligibility_criteria": "Burnaby residents; grief counselling for ages 13+ and adults; free; no referral needed",
+      "language_support": "English"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "211 BC listing (bc.211.ca) and Fraser Northwest Pathways listing, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Senior Support",
+      "service_name": "New Vista Society - Affordable Seniors Housing",
+      "description": "Subsidized and lower-market independent housing for low-income seniors, including New Vista Place (146 bachelor and 28 one-bedroom units for seniors 55+).",
+      "physical_address": "112-7210 Mary Avenue (Housing Office)",
+      "city": "Burnaby",
+      "contact_phone": "604-525-3288",
+      "official_url": "https://newvista.bc.ca/affordable-housing/application-resources/",
+      "operating_hours": "Housing office Mon-Fri 8:30am-4:30pm",
+      "eligibility_criteria": "Low-income seniors 55+ (also families and people with disabilities at some sites); rent 30% of gross household income; apply through the BC Housing Registry",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "New Vista Society official site (newvista.bc.ca, housing and contact pages) and 211 BC listing (bc.211.ca, Housing Rental Office), Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
+  },
+  {
+    "resource": {
+      "service_type": "Housing",
+      "service_name": "Society to End Homelessness in Burnaby - Outreach Resource Centre",
+      "description": "Weekly drop-in for people experiencing or at risk of homelessness: hot meal, clothing, hygiene items, outreach workers, and connections to housing and health services.",
+      "physical_address": "7375 Kingsway",
+      "city": "Burnaby",
+      "contact_phone": "604-902-3071",
+      "official_url": "https://burnabyhomeless.org/outreach-resource-centre/",
+      "operating_hours": "Thursdays 9am-11am (location and times change; call to confirm)",
+      "eligibility_criteria": "People experiencing or at risk of homelessness in Burnaby",
+      "language_support": "Not specified in source listings; contact agency"
+    },
+    "review": {
+      "verification_status": "Verified",
+      "verification_evidence": "Burnaby Public Library housing resources page (bpl.bc.ca, July 2026), City of Burnaby community resources page (burnaby.ca), and CanadaHelps charity profile, Nov 2026",
+      "reviewed_at": "2026-11-24",
+      "next_review_due": "2026-12-24"
+    }
   }
 ]
