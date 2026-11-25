@@ -36,6 +36,24 @@ describe.skipIf(!url)('database integration', () => {
     expect(rows[0].v).toBe(rows[0].r);
   });
 
+  it('treats categories as a strict filter, with keywords only ranking', async () => {
+    const rows = await repo.search({
+      categories: ['Health'],
+      keywords: ['accident', 'emergency', 'housing', 'legal'],
+      city: 'Vancouver',
+      limit: 20,
+    });
+    expect(rows.length).toBeGreaterThan(0);
+    for (const r of rows) expect([r.service_type, r.city]).toEqual(['Health', 'Vancouver']);
+  });
+
+  it('loads public resources by ID in the order given', async () => {
+    const all = await repo.list({ city: null, serviceType: null });
+    const [a, b] = [all.at(0).resource_id, all.at(1).resource_id];
+    const rows = await repo.findByIds([b, a, 999999]);
+    expect(rows.map((r) => r.resource_id)).toEqual([b, a]);
+  });
+
   it('finds food banks in Surrey by category and city', async () => {
     const rows = await repo.search({
       categories: ['Food'],

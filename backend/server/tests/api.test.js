@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import request from 'supertest';
 import { createApp } from '../src/app.js';
-import { NO_RESULTS_MESSAGE } from '../src/services/searchService.js';
+import { IRRELEVANT_MESSAGE, NO_RESULTS_MESSAGE } from '../src/services/searchService.js';
+import { createAbuseGuard, PAUSED_MESSAGE } from '../src/middleware/abuseGuard.js';
 
 const ROW = {
   resource_id: 8,
@@ -23,6 +24,7 @@ function fakeRepository(overrides = {}) {
   return {
     search: vi.fn().mockResolvedValue([ROW]),
     searchText: vi.fn().mockResolvedValue([ROW]),
+    findByIds: vi.fn().mockResolvedValue([ROW]),
     findById: vi.fn().mockResolvedValue(ROW),
     list: vi.fn().mockResolvedValue([ROW]),
     listServiceTypes: vi.fn().mockResolvedValue(['Food', 'Housing']),
@@ -39,19 +41,22 @@ beforeEach(() => {
   app = createApp({ repository, logRequests: false });
 });
 
+const NEED = {
+  intent: 'need',
+  urgency: 'none',
+  categories: ['Food'],
+  keywords: ['food', 'bank'],
+  city: 'Surrey',
+  provider: 'gemini',
+};
+
 function fakeAi(overrides = {}) {
   return {
     enabled: true,
-    interpret: vi.fn().mockResolvedValue({
-      categories: ['Food'],
-      keywords: ['food', 'bank'],
-      city: 'Surrey',
-      provider: 'gemini',
-    }),
-    explain: vi.fn().mockResolvedValue({
-      explanations: new Map([[8, 'Gives food hampers in Surrey.']]),
-      provider: 'gemini',
-    }),
+    interpret: vi.fn().mockResolvedValue(NEED),
+    summarize: vi
+      .fn()
+      .mockResolvedValue({ summary: 'These food banks give groceries in Surrey.', provider: 'gemini' }),
     ...overrides,
   };
 }
@@ -64,13 +69,23 @@ describe('POST /api/search', () => {
       status: 'ok',
       city: 'Surrey',
       interpreted: null,
-      ai: { interpreted_by: null, explained_by: null },
+      urgency: null,
+      ai: { interpreted_by: null },
+      summary_available: false,
     });
-    expect(res.body.results[0]).toMatchObject({
+    expect(res.body.results[0]).toEqual({
       resource_id: 8,
+      service_name: 'Surrey Food Bank',
+      service_type: 'Food',
+      description: 'Food hampers',
+      physical_address: 'Unit 1 - 13478 78th Avenue',
+      city: 'Surrey',
+      contact_phone: '604-581-5443',
       official_url: 'https://surreyfoodbank.org',
+      operating_hours: 'Mon-Fri',
+      eligibility_criteria: 'Photo ID',
+      language_support: 'English',
       verification: { status: 'Verified', last_reviewed_at: '2026-09-15T00:00:00.000Z' },
-      match_explanation: null,
     });
     expect(repository.searchText).toHaveBeenCalledWith({
       query: 'Food bank in Surrey',
@@ -88,8 +103,20 @@ describe('POST /api/search', () => {
       status: 'no_results',
       count: 0,
       results: [],
+      summary_available: false,
       message: NO_RESULTS_MESSAGE,
     });
+  });
+
+  it('treats input with no letters as irrelevant without searching', async () => {
+    const res = await request(app).post('/api/search').send({ query: '!!! 123 ???' });
+    expect(res.body).toMatchObject({ status: 'irrelevant', message: IRRELEVANT_MESSAGE, results: [] });
+    expect(repository.searchText).not.toHaveBeenCalled();
+  });
+
+  it('accepts letters in any language', async () => {
+    const res = await request(app).post('/api/search').send({ query: '食物' });
+    expect(res.body.status).not.toBe('irrelevant');
   });
 
   describe('with AI', () => {
@@ -99,7 +126,7 @@ describe('POST /api/search', () => {
       app = createApp({ repository, ai, logRequests: false });
     });
 
-    it('interprets with database values, searches, and adds the explanations', async () => {
+    it('interprets with database values and returns cards, with a summary to fetch next', async () => {
       const res = await request(app).post('/api/search').send({ query: 'food bank in surrey' });
       expect(ai.interpret).toHaveBeenCalledWith({
         query: 'food bank in surrey',
@@ -115,12 +142,19 @@ describe('POST /api/search', () => {
       expect(res.body).toMatchObject({
         status: 'ok',
         city: 'Surrey',
-        interpreted: { categories: ['Food'], keywords: ['food', 'bank'], city: 'Surrey' },
-        ai: { interpreted_by: 'gemini', explained_by: 'gemini' },
+        urgency: null,
+        interpreted: {
+          intent: 'need',
+          urgency: 'none',
+          categories: ['Food'],
+          keywords: ['food', 'bank'],
+          city: 'Surrey',
+        },
+        ai: { interpreted_by: 'gemini' },
+        summary_available: true,
       });
-      expect(res.body.results[0].match_explanation).toBe('Gives food hampers in Surrey.');
-      // The explain step only ever sees rows that came from the database.
-      expect(ai.explain).toHaveBeenCalledWith({ query: 'food bank in surrey', candidates: [ROW] });
+      // The summary is a separate request, so cards come back without waiting for it.
+      expect(ai.summarize).not.toHaveBeenCalled();
     });
 
     it('lets the city filter win over a city named in the query', async () => {
@@ -128,38 +162,90 @@ describe('POST /api/search', () => {
       expect(repository.search).toHaveBeenCalledWith(expect.objectContaining({ city: 'Vancouver' }));
     });
 
+    it('flags emergencies and still returns results', async () => {
+      ai.interpret.mockResolvedValue({ ...NEED, urgency: 'emergency', categories: ['Health'] });
+      const res = await request(app).post('/api/search').send({ query: 'I got into an accident. Help' });
+      expect(res.body).toMatchObject({ status: 'ok', urgency: 'emergency' });
+    });
+
+    it('flags self-harm even when nothing matches', async () => {
+      ai.interpret.mockResolvedValue({ ...NEED, urgency: 'self_harm', categories: [], keywords: [] });
+      const res = await request(app).post('/api/search').send({ query: 'I want to hurt myself' });
+      expect(res.body).toMatchObject({ status: 'no_results', urgency: 'self_harm' });
+    });
+
+    it.each(['off_topic', 'gibberish'])('answers a %s query with a message and no search', async (intent) => {
+      ai.interpret.mockResolvedValue({ ...NEED, intent });
+      const res = await request(app).post('/api/search').send({ query: 'what is 2+2' });
+      expect(res.body).toMatchObject({
+        status: 'irrelevant',
+        message: IRRELEVANT_MESSAGE,
+        summary_available: false,
+      });
+      expect(repository.search).not.toHaveBeenCalled();
+    });
+
     it('falls back to database text search when every AI provider fails', async () => {
       ai.interpret.mockResolvedValue(null);
-      ai.explain.mockResolvedValue(null);
       const res = await request(app).post('/api/search').send({ query: 'food bank' });
       expect(repository.searchText).toHaveBeenCalled();
-      expect(ai.explain).not.toHaveBeenCalled();
       expect(res.body).toMatchObject({
         status: 'ok',
         interpreted: null,
-        ai: { interpreted_by: null, explained_by: null },
+        ai: { interpreted_by: null },
+        summary_available: false,
       });
-      expect(res.body.results[0].match_explanation).toBeNull();
     });
 
-    it('returns the cards without explanations when only the explain step fails', async () => {
-      ai.explain.mockResolvedValue(null);
-      const res = await request(app).post('/api/search').send({ query: 'food bank' });
-      expect(res.body.ai).toEqual({ interpreted_by: 'gemini', explained_by: null });
-      expect(res.body.results[0].match_explanation).toBeNull();
-    });
-
-    it('skips the database and the explain step when the AI finds no need', async () => {
-      ai.interpret.mockResolvedValue({ categories: [], keywords: [], city: null, provider: 'gemini' });
-      const res = await request(app).post('/api/search').send({ query: 'hello' });
+    it('skips the database when the AI finds no service type or keyword', async () => {
+      ai.interpret.mockResolvedValue({ ...NEED, categories: [], keywords: [] });
+      const res = await request(app).post('/api/search').send({ query: 'help' });
       expect(res.body.status).toBe('no_results');
       expect(repository.search).not.toHaveBeenCalled();
-      expect(ai.explain).not.toHaveBeenCalled();
     });
 
     it('does not call the AI for invalid input', async () => {
       await request(app).post('/api/search').send({ query: '' });
       expect(ai.interpret).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('pausing repeated unrelated searches', () => {
+    let ai;
+    let now;
+    beforeEach(() => {
+      now = 1_000_000;
+      ai = fakeAi({ interpret: vi.fn().mockResolvedValue({ ...NEED, intent: 'off_topic' }) });
+      const abuseGuard = createAbuseGuard({ now: () => now });
+      app = createApp({ repository, ai, abuseGuard, logRequests: false });
+    });
+
+    it('warns on the second, pauses on the third, and lifts the pause after 30 minutes', async () => {
+      const search = () => request(app).post('/api/search').send({ query: 'tell me a joke' });
+      expect((await search()).body.message).toBe(IRRELEVANT_MESSAGE);
+      expect((await search()).body.message).toMatch(
+        /Another unrelated search will pause search for 30 minutes/,
+      );
+      expect((await search()).body.message).toBe(PAUSED_MESSAGE);
+
+      const paused = await search();
+      expect(paused.status).toBe(429);
+      expect(paused.body.error.code).toBe('SEARCH_PAUSED');
+      expect(paused.headers['retry-after']).toBe('1800');
+      const summary = await request(app)
+        .post('/api/search/summary')
+        .send({ query: 'food', resource_ids: [8] });
+      expect(summary.status).toBe(429);
+
+      now += 30 * 60_000 + 1;
+      expect((await search()).status).toBe(200);
+    });
+
+    it('never counts real needs', async () => {
+      ai.interpret.mockResolvedValue(NEED);
+      for (let i = 0; i < 5; i++) {
+        expect((await request(app).post('/api/search').send({ query: 'food' })).status).toBe(200);
+      }
     });
   });
 
@@ -207,12 +293,67 @@ describe('POST /api/search', () => {
   });
 });
 
+describe('POST /api/search/summary', () => {
+  it('summarizes the given cards, loaded fresh from the database', async () => {
+    const ai = fakeAi();
+    app = createApp({ repository, ai, logRequests: false });
+    const res = await request(app)
+      .post('/api/search/summary')
+      .send({ query: ' food bank ', resource_ids: [8, 8] });
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      summary: 'These food banks give groceries in Surrey.',
+      ai: { summarized_by: 'gemini' },
+    });
+    expect(repository.findByIds).toHaveBeenCalledWith([8]);
+    expect(ai.summarize).toHaveBeenCalledWith({ query: 'food bank', candidates: [ROW] });
+  });
+
+  it('returns a null summary when the AI fails or is not configured', async () => {
+    app = createApp({
+      repository,
+      ai: fakeAi({ summarize: vi.fn().mockResolvedValue(null) }),
+      logRequests: false,
+    });
+    expect(
+      (
+        await request(app)
+          .post('/api/search/summary')
+          .send({ query: 'food', resource_ids: [8] })
+      ).body,
+    ).toEqual({
+      summary: null,
+      ai: { summarized_by: null },
+    });
+    app = createApp({ repository, logRequests: false });
+    expect(
+      (
+        await request(app)
+          .post('/api/search/summary')
+          .send({ query: 'food', resource_ids: [8] })
+      ).body.summary,
+    ).toBeNull();
+  });
+
+  it.each([
+    [{ query: 'food' }],
+    [{ query: 'food', resource_ids: [] }],
+    [{ query: 'food', resource_ids: [0] }],
+    [{ query: 'food', resource_ids: ['8'] }],
+    [{ query: 'food', resource_ids: Array.from({ length: 21 }, (_, i) => i + 1) }],
+    [{ query: '', resource_ids: [8] }],
+  ])('rejects %j', async (body) => {
+    const res = await request(app).post('/api/search/summary').send(body);
+    expect(res.status).toBe(400);
+    expect(repository.findByIds).not.toHaveBeenCalled();
+  });
+});
+
 describe('GET /api/resources', () => {
-  it('lists public resources without match_explanation', async () => {
+  it('lists public resources', async () => {
     const res = await request(app).get('/api/resources');
     expect(res.status).toBe(200);
     expect(res.body.count).toBe(1);
-    expect(res.body.resources[0]).not.toHaveProperty('match_explanation');
     expect(repository.list).toHaveBeenCalledWith({ city: null, serviceType: null });
   });
 
@@ -228,11 +369,10 @@ describe('GET /api/resources', () => {
 });
 
 describe('GET /api/resources/:id', () => {
-  it('returns a public resource without match_explanation', async () => {
+  it('returns a public resource', async () => {
     const res = await request(app).get('/api/resources/8');
     expect(res.status).toBe(200);
     expect(res.body.resource.service_name).toBe('Surrey Food Bank');
-    expect(res.body.resource).not.toHaveProperty('match_explanation');
   });
 
   it('returns 404 when the resource is missing or not verified', async () => {

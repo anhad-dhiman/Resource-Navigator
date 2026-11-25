@@ -21,10 +21,7 @@ export function resourcesRouter({ repository }) {
     const city = optionalFilter(req.query.city, 'city');
     const serviceType = optionalFilter(req.query.type, 'type');
     const rows = await repository.list({ city, serviceType });
-    const resources = rows.map((row) => {
-      const { match_explanation: _unused, ...resource } = toResourceCard(row);
-      return resource;
-    });
+    const resources = rows.map(toResourceCard);
     res.json({ count: resources.length, resources });
   });
 
@@ -37,8 +34,7 @@ export function resourcesRouter({ repository }) {
     if (!row) {
       throw new HttpError(404, 'NOT_FOUND', 'This resource was not found or is not currently verified.');
     }
-    const { match_explanation: _unused, ...resource } = toResourceCard(row);
-    res.json({ resource });
+    res.json({ resource: toResourceCard(row) });
   });
 
   router.get('/cities', async (_req, res) => {

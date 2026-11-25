@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Clock, Globe, MapPin, Navigation, Phone, Sparkles } from 'lucide-react';
+import { Clock, Globe, MapPin, Navigation, Phone } from 'lucide-react';
 import { CategoryBadge, VerificationBadge } from './Badges.jsx';
 import { directionsUrl, displayHost, formatDate, safeUrl, telHref } from '../lib/format.js';
 
@@ -13,8 +13,7 @@ function Row({ icon: Icon, children }) {
 }
 
 /**
- * One resource. Every fact shown comes from the database record. The optional
- * match_explanation is written by the AI from this record's own fields and is labelled as such.
+ * One resource. Every fact shown comes from the database record.
  */
 export default function ResourceCard({ resource }) {
   const {
@@ -28,7 +27,6 @@ export default function ResourceCard({ resource }) {
     official_url,
     operating_hours,
     verification,
-    match_explanation,
   } = resource;
   const url = safeUrl(official_url);
   const tel = telHref(contact_phone);
@@ -51,16 +49,6 @@ export default function ResourceCard({ resource }) {
 
       {description && (
         <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">{description}</p>
-      )}
-
-      {match_explanation && (
-        <p className="mt-3 flex gap-2 rounded-lg bg-blue-50 p-3 text-sm text-blue-900">
-          <Sparkles className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-          <span>
-            <span className="font-semibold">Why this may help (AI summary): </span>
-            {match_explanation}
-          </span>
-        </p>
       )}
 
       <ul className="mt-4 space-y-2 text-sm text-slate-700">

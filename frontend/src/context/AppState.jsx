@@ -11,7 +11,13 @@ import { AppStateContext } from './appStateContext.js';
 export function AppStateProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState('');
-  const [search, setSearch] = useState({ status: 'idle', query: '', response: null, error: null });
+  const [search, setSearch] = useState({
+    status: 'idle',
+    query: '',
+    response: null,
+    error: null,
+    summary: null,
+  });
   const requestId = useRef(0);
 
   useEffect(() => {
@@ -21,32 +27,49 @@ export function AppStateProvider({ children }) {
       .catch(() => setCities([]));
   }, []);
 
-  const execute = useCallback(async (query, searchCity) => {
-    const id = ++requestId.current;
-    setSearch({ status: 'loading', query, response: null, error: null });
-    try {
-      const response = await api.search({ query, city: searchCity });
-      // Ignore responses for searches that have since been replaced.
-      if (id === requestId.current) setSearch({ status: 'done', query, response, error: null });
-    } catch (error) {
-      if (id === requestId.current) setSearch({ status: 'error', query, response: null, error });
-    }
-  }, []);
+  /**
+   * Runs a search, then (if offered) fetches the AI summary. Cards show as soon as the
+   * search returns; `summary` fills in afterwards: null | {status:'loading'|'done'|'error', text}.
+   */
+  const runSearch = useCallback(
+    async (query) => {
+      const id = ++requestId.current;
+      const current = () => id === requestId.current; // ignore replies for replaced searches
+      setSearch({ status: 'loading', query, response: null, error: null, summary: null });
+      let response;
+      try {
+        response = await api.search({ query, city });
+      } catch (error) {
+        if (current()) setSearch({ status: 'error', query, response: null, error, summary: null });
+        return;
+      }
+      if (!current()) return;
+      const wantsSummary = response.status === 'ok' && response.summary_available;
+      setSearch({
+        status: 'done',
+        query,
+        response,
+        error: null,
+        summary: wantsSummary ? { status: 'loading', text: null } : null,
+      });
+      if (!wantsSummary) return;
 
-  const runSearch = useCallback((query) => execute(query, city), [execute, city]);
-
-  // Changing the city re-runs the current search, if there is one.
-  const changeCity = useCallback(
-    (next) => {
-      setCity(next);
-      if (search.status !== 'idle' && search.query) execute(search.query, next);
+      let summary;
+      try {
+        const data = await api.summary({ query, resourceIds: response.results.map((r) => r.resource_id) });
+        summary = data.summary ? { status: 'done', text: data.summary } : null;
+      } catch {
+        summary = null; // the cards are what matter; a missing summary is not an error to show
+      }
+      if (current()) setSearch((s) => ({ ...s, summary }));
     },
-    [execute, search.status, search.query],
+    [city],
   );
 
   const value = useMemo(
-    () => ({ cities, city, setCity: changeCity, search, runSearch }),
-    [cities, city, changeCity, search, runSearch],
+    // Changing the city only sets the filter; the next search uses it.
+    () => ({ cities, city, setCity, search, runSearch }),
+    [cities, city, search, runSearch],
   );
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>;
 }

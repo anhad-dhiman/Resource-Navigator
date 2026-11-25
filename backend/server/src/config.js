@@ -25,6 +25,9 @@ export const config = {
   },
   // Per AI call, per provider.
   aiTimeoutMs: Number(process.env.AI_TIMEOUT_MS) || 4000,
+  // Set to the number of proxies in front of the API in production (e.g. 1), so the
+  // client's real IP is used for rate limits. Leave unset locally.
+  trustProxy: Number(process.env.TRUST_PROXY) || false,
   maxQueryLength: 500,
   maxResults: 20,
 };

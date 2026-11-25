@@ -32,10 +32,8 @@ describe('ResourceCard', () => {
     expect(screen.queryByText(/javascript/)).not.toBeInTheDocument();
   });
 
-  it('shows the AI explanation only when present', () => {
-    renderCard();
-    expect(screen.queryByText(/why this may help/i)).not.toBeInTheDocument();
-    renderCard({ match_explanation: 'Offers food hampers in Surrey.' });
-    expect(screen.getByText('Offers food hampers in Surrey.')).toBeInTheDocument();
+  it('shows only database fields, no AI text', () => {
+    renderCard({ match_explanation: 'AI text that must not appear' });
+    expect(screen.queryByText('AI text that must not appear')).not.toBeInTheDocument();
   });
 });

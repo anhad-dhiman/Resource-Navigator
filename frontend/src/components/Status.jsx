@@ -1,4 +1,4 @@
-import { AlertTriangle, PhoneCall } from 'lucide-react';
+import { AlertTriangle, MessageCircleQuestion, PhoneCall } from 'lucide-react';
 
 /** Shown when the backend returns status "no_results": the fixed 211 BC referral. */
 export function NoResults({ message }) {
@@ -53,6 +53,21 @@ export function CardSkeletons({ count = 3 }) {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+/** Shown when the backend returns status "irrelevant": the query wasn't about community services. */
+export function NotAServiceRequest({ message }) {
+  return (
+    <div className="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-6 text-center">
+      <MessageCircleQuestion className="mx-auto size-8 text-blue-600" aria-hidden="true" />
+      <h3 className="mt-3 text-lg font-semibold text-slate-900">Tell us what you need help with</h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-700">{message}</p>
+      <p className="mt-3 text-sm text-slate-500">
+        For example: &ldquo;I need a food bank near Surrey&rdquo; or &ldquo;free legal advice about my
+        landlord&rdquo;.
+      </p>
     </div>
   );
 }

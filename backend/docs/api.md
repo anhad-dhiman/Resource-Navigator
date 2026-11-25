@@ -13,20 +13,23 @@ Errors always use this shape:
 }
 ```
 
-| Code                  | Status | When                                                       |
-| --------------------- | ------ | ---------------------------------------------------------- |
-| `INVALID_QUERY`       | 400    | Query missing, empty, over 500 chars, or has control chars |
-| `INVALID_CITY`        | 400    | City is not one of the cities in the database              |
-| `INVALID_BODY`        | 400    | Body is not valid JSON or is over 10 KB                    |
-| `INVALID_FILTER`      | 400    | `city` or `type` filter repeated or over 100 characters    |
-| `INVALID_ID`          | 400    | Resource id is not a positive integer                      |
-| `NOT_FOUND`           | 404    | Unknown route, or resource missing / not verified          |
-| `RATE_LIMITED`        | 429    | More than 30 searches per minute from one client           |
-| `SERVICE_UNAVAILABLE` | 503    | Database or other internal failure (no details exposed)    |
+| Code                   | Status | When                                                             |
+| ---------------------- | ------ | ---------------------------------------------------------------- |
+| `INVALID_QUERY`        | 400    | Query missing, empty, over 500 chars, or has control chars       |
+| `INVALID_CITY`         | 400    | City is not one of the cities in the database                    |
+| `INVALID_BODY`         | 400    | Body is not valid JSON or is over 10 KB                          |
+| `INVALID_RESOURCE_IDS` | 400    | `resource_ids` missing, empty, over 20, or not positive integers |
+| `SEARCH_PAUSED`        | 429    | Paused for 30 minutes after repeated unrelated searches          |
+| `INVALID_FILTER`       | 400    | `city` or `type` filter repeated or over 100 characters          |
+| `INVALID_ID`           | 400    | Resource id is not a positive integer                            |
+| `NOT_FOUND`            | 404    | Unknown route, or resource missing / not verified                |
+| `RATE_LIMITED`         | 429    | More than 30 searches per minute from one client                 |
+| `SERVICE_UNAVAILABLE`  | 503    | Database or other internal failure (no details exposed)          |
 
 ## POST /api/search
 
-Plain-language search over verified resources (FR1, FR2, FR6, FR9).
+Plain-language search over verified resources (FR1, FR2, FR6, FR9). Returns the cards as soon as
+the database answers; the AI summary is a second request (`POST /api/search/summary`).
 
 Request:
 
@@ -37,19 +40,23 @@ Request:
 - `query` (string, required): 1–500 characters after trimming, no control characters.
 - `city` (string, optional): case-insensitive; must match a value from `GET /api/cities`.
 
-Response `200`, matches found:
+Response `200`. `status` is `ok`, `no_results` or `irrelevant`:
 
 ```json
 {
   "status": "ok",
   "interpreted": {
+    "intent": "need",
+    "urgency": "none",
     "categories": ["Housing", "Food"],
     "keywords": ["rent", "food", "groceries"],
     "city": null
   },
-  "ai": { "interpreted_by": "gemini", "explained_by": "gemini" },
+  "ai": { "interpreted_by": "gemini" },
+  "urgency": null,
   "city": "Surrey",
   "count": 1,
+  "summary_available": true,
   "results": [
     {
       "resource_id": 8,
@@ -66,48 +73,65 @@ Response `200`, matches found:
       "verification": {
         "status": "Verified",
         "last_reviewed_at": "2026-09-15T00:00:00.000Z"
-      },
-      "match_explanation": "Provides free food hampers to low-income families in Surrey."
+      }
     }
   ]
 }
 ```
 
-Response `200`, no matches (the 211 BC referral):
-
-```json
-{
-  "status": "no_results",
-  "interpreted": { "categories": [], "keywords": [], "city": null },
-  "ai": { "interpreted_by": "gemini", "explained_by": null },
-  "city": null,
-  "count": 0,
-  "results": [],
-  "message": "We could not find a verified service that matches your request. Please call or text 2-1-1, ..."
-}
-```
-
-Notes:
+- `urgency`: `"emergency"` (someone hurt or in danger) or `"self_harm"`, else `null`. The frontend
+  shows a 9-1-1 banner (and 9-8-8 for self-harm) above the results.
+- `summary_available`: `true` when the AI is working and there are results; the frontend then calls
+  `POST /api/search/summary`.
+- `no_results` adds `"message"` with the 211 BC referral.
+- `irrelevant` (off-topic, gibberish, or no letters at all): no database search, `results` is
+  empty, and `"message"` asks the user to describe what they need.
 
 How a search runs (`services/searchService.js`, `ai/`):
 
-1. **Interpret.** The AI turns the query into `categories` (chosen only from the service types in
-   the database), `keywords`, and a `city` named in the query (chosen only from the database's
-   cities). The query is sent as a JSON field, never mixed into the instructions.
-2. **Search.** The database returns verified records matching any category or keyword. A city
-   picked in the `city` field wins over a city named in the query.
-3. **Explain.** If there are results, the AI writes `match_explanation` for each card from that
-   record's own fields. Explanations with web addresses, email addresses or numbers of three or
-   more digits are dropped, so the AI can't add contact details.
+1. **Pre-check.** Input with no letters (in any language) is `irrelevant`, without calling the AI.
+2. **Interpret.** The AI returns `intent` (`need`, `off_topic`, `gibberish`), `urgency`, and
+   `categories`, `keywords` and `city`, chosen only from values in the database. The query is sent
+   as a JSON field, never mixed into the instructions. An emergency is always treated as a need.
+3. **Search.** When the AI picks categories, they are a strict filter and keywords only rank the
+   results. With no categories, any keyword can match. A `city` in the request wins over a city
+   named in the query.
 
-Providers are tried in order: Gemini, then Groq. `ai.interpreted_by` / `ai.explained_by` name the
-provider that answered, or `null`.
+When every provider fails (rate limit, timeout, outage) or no API key is set, `interpreted` is
+`null`, the database matches the query's own words with PostgreSQL full-text search, and
+`summary_available` is `false`.
 
-When every provider fails (rate limit, timeout, outage) or no API key is set:
+**Pausing.** Each `irrelevant` search counts against the client's IP address. The second within
+15 minutes adds a warning to the message; the third pauses search for that IP for 30 minutes:
+both search endpoints then return `429` with code `SEARCH_PAUSED` and a `Retry-After` header.
+Only the IP address and timestamps are kept, in memory. In production behind a proxy, set
+`TRUST_PROXY` so the real client IP is used.
 
-- `interpreted` is `null` and the database matches the query's own words with PostgreSQL full-text
-  search (its built-in English dictionary removes stop words). Results are broader than with the AI.
-- `match_explanation` is `null` on every card, and the explain step is skipped.
+## POST /api/search/summary
+
+One AI-written summary of why a search's results were shown.
+
+Request (the query and the `resource_id`s from the search response, at most 20):
+
+```json
+{
+  "query": "I can't pay rent and I'm running low on food",
+  "resource_ids": [8, 12, 3]
+}
+```
+
+Response `200`:
+
+```json
+{
+  "summary": "These food banks give free groceries to low-income residents. Most ask for photo ID and proof of address.",
+  "ai": { "summarized_by": "gemini" }
+}
+```
+
+The records are loaded again from the database by ID (only public ones), so the AI only sees
+verified data. `summary` is `null` when the AI fails, or when the text contains web or email
+addresses or numbers of three or more digits (so it can't add contact details).
 
 The query text is never stored or logged by this API. It is sent to the AI provider; see the
 privacy policy on the About page.

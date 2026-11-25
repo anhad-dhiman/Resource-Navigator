@@ -30,6 +30,7 @@ console.log(
 const app = createApp({
   repository: createResourceRepository(pool),
   ai,
+  trustProxy: config.trustProxy,
   authService,
   secureCookies: config.secureCookies,
   corsOrigins: config.corsOrigins,
@@ -40,6 +41,10 @@ const app = createApp({
 const server = app.listen(config.port, () => {
   console.log(`Resource Navigator API listening on port ${config.port}`);
 });
+// Keep idle connections open longer than proxies in front of the API (the Vite dev
+// proxy, hosting load balancers) so they never reuse a socket this server just closed.
+server.keepAliveTimeout = 65_000;
+server.headersTimeout = 66_000;
 
 function shutdown() {
   server.close(() => pool.end());

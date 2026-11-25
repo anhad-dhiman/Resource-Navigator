@@ -34,7 +34,24 @@ function redact(body) {
   );
 }
 
-async function request(method, path, body) {
+const RETRY_DELAY_MS = 400;
+
+/**
+ * Sends one JSON request. With `retry`, a connection failure, or a 5xx response that
+ * didn't come from our API (no JSON error body, e.g. a dropped connection at a proxy),
+ * is retried once. Only used for read-only calls, so a retry can't do anything twice.
+ */
+async function request(method, path, body, { retry = false } = {}) {
+  try {
+    return await send(method, path, body);
+  } catch (err) {
+    if (!retry || !err.retryable) throw err;
+    await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+    return send(method, path, body);
+  }
+}
+
+async function send(method, path, body) {
   const started = performance.now();
   const exchange = { method, path, request: redact(body), at: new Date().toISOString() };
   let res;
@@ -50,11 +67,13 @@ async function request(method, path, body) {
     data = await res.json().catch(() => null);
   } catch {
     listeners.forEach((l) => l({ ...exchange, status: 0, response: null, ms: performance.now() - started }));
-    throw new ApiError(
+    const error = new ApiError(
       'NETWORK_ERROR',
       'We could not reach the service. Please check your connection and try again.',
       0,
     );
+    error.retryable = true;
+    throw error;
   }
 
   listeners.forEach((l) =>
@@ -62,11 +81,13 @@ async function request(method, path, body) {
   );
 
   if (!res.ok) {
-    throw new ApiError(
+    const error = new ApiError(
       data?.error?.code ?? 'UNKNOWN',
       data?.error?.message ?? 'Something went wrong. Please try again later.',
       res.status,
     );
+    error.retryable = res.status >= 500 && !data?.error;
+    throw error;
   }
   return data;
 }
@@ -80,9 +101,18 @@ export const api = {
   /**
    * POST /api/search
    * @param {{query: string, city?: string}} input
-   * @returns {Promise<{status: 'ok'|'no_results', interpreted: object, city: string|null, count: number, results: object[], message?: string}>}
+   * @returns {Promise<{status: 'ok'|'no_results'|'irrelevant', urgency: 'emergency'|'self_harm'|null, summary_available: boolean, interpreted: object|null, city: string|null, count: number, results: object[], message?: string}>}
    */
-  search: ({ query, city }) => request('POST', '/api/search', { query, ...(city && { city }) }),
+  search: ({ query, city }) =>
+    request('POST', '/api/search', { query, ...(city && { city }) }, { retry: true }),
+
+  /**
+   * POST /api/search/summary: one AI summary for the cards a search returned.
+   * @param {{query: string, resourceIds: number[]}} input
+   * @returns {Promise<{summary: string|null, ai: {summarized_by: string|null}}>}
+   */
+  summary: ({ query, resourceIds }) =>
+    request('POST', '/api/search/summary', { query, resource_ids: resourceIds }, { retry: true }),
 
   /** GET /api/resources/:id → {resource} */
   getResource: (id) => request('GET', `/api/resources/${encodeURIComponent(id)}`),

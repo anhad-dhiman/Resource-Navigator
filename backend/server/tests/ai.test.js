@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createGeminiProvider } from '../src/ai/gemini.js';
 import { createGroqProvider } from '../src/ai/groq.js';
-import { createAiService, cleanKeywords, isGroundedExplanation } from '../src/ai/aiService.js';
+import { createAiService, cleanKeywords, isGroundedText } from '../src/ai/aiService.js';
 import { createAiFromConfig } from '../src/ai/index.js';
 import { AiError } from '../src/ai/errors.js';
 
@@ -109,14 +109,27 @@ describe('aiService', () => {
     const gemini = provider('gemini', async () => {
       throw new AiError('rate_limited', 'gemini');
     });
-    const groq = provider('groq', async () => ({ service_types: ['Food'], keywords: ['food'], city: '' }));
+    const groq = provider('groq', async () => ({
+      intent: 'need',
+      urgency: 'none',
+      service_types: ['Food'],
+      keywords: ['food'],
+      city: '',
+    }));
     const ai = createAiService({ providers: [gemini, groq], log });
     const result = await ai.interpret({
       query: 'my private situation',
       serviceTypes: ['Food'],
       cities: ['Surrey'],
     });
-    expect(result).toEqual({ categories: ['Food'], keywords: ['food'], city: null, provider: 'groq' });
+    expect(result).toEqual({
+      intent: 'need',
+      urgency: 'none',
+      categories: ['Food'],
+      keywords: ['food'],
+      city: null,
+      provider: 'groq',
+    });
     expect(log).toHaveBeenCalledWith('AI interpretation via gemini failed: rate_limited');
     expect(log.mock.calls.flat().join(' ')).not.toContain('private');
   });
@@ -127,7 +140,7 @@ describe('aiService', () => {
     });
     const ai = createAiService({ providers: [bad], log: quiet });
     expect(await ai.interpret({ query: 'x', serviceTypes: ['Food'], cities: [] })).toBeNull();
-    expect(await ai.explain({ query: 'x', candidates: [{ resource_id: 1 }] })).toBeNull();
+    expect(await ai.summarize({ query: 'x', candidates: [{ resource_id: 1 }] })).toBeNull();
   });
 
   it('sends the query only as a JSON field, with database values as the allowed choices', async () => {
@@ -143,6 +156,8 @@ describe('aiService', () => {
     expect(req.system).not.toContain('Ignore your rules');
     expect(req.schema.properties.service_types.items.enum).toEqual(['Food', 'Housing']);
     expect(req.schema.properties.city.enum).toEqual(['', 'Surrey']);
+    expect(req.schema.properties.intent.enum).toEqual(['need', 'off_topic', 'gibberish']);
+    expect(req.schema.properties.urgency.enum).toEqual(['none', 'emergency', 'self_harm']);
   });
 
   it('drops values the database did not offer and cleans keywords', async () => {
@@ -158,24 +173,56 @@ describe('aiService', () => {
     expect(result.city).toBeNull();
   });
 
-  it('keeps only grounded explanations for real candidates', async () => {
+  it.each([
+    [
+      { intent: 'off_topic', urgency: 'emergency' },
+      { intent: 'need', urgency: 'emergency' },
+    ],
+    [
+      { intent: 'gibberish', urgency: 'none' },
+      { intent: 'gibberish', urgency: 'none' },
+    ],
+    [
+      { intent: 'weird', urgency: 'panic' },
+      { intent: 'need', urgency: 'none' },
+    ],
+  ])('normalizes intent and urgency %j', async (raw, expected) => {
+    const p = provider('gemini', async () => ({ ...raw, service_types: [], keywords: [], city: '' }));
+    const ai = createAiService({ providers: [p], log: quiet });
+    expect(await ai.interpret({ query: 'q', serviceTypes: ['Food'], cities: [] })).toMatchObject(expected);
+  });
+
+  it('summarizes from the candidates fields only and checks the result', async () => {
     const p = provider('gemini', async () => ({
-      explanations: [
-        { resource_id: 1, explanation: 'Offers free groceries to low-income families.' },
-        { resource_id: 2, explanation: 'Call 604-555-1234 for help.' },
-        { resource_id: 3, explanation: 'Visit https://example.org.' },
-        { resource_id: 99, explanation: 'Not a candidate.' },
-      ],
+      summary: '  These services offer free groceries to low-income families.  ',
     }));
     const ai = createAiService({ providers: [p], log: quiet });
-    const result = await ai.explain({
-      query: 'food',
-      candidates: [{ resource_id: 1 }, { resource_id: 2 }, { resource_id: 3 }],
+    const row = {
+      resource_id: 1,
+      service_name: 'Food Bank',
+      service_type: 'Food',
+      description: 'Groceries',
+      eligibility_criteria: 'Low income',
+      language_support: 'English',
+      city: 'Surrey',
+      contact_phone: '604-555-1234',
+      physical_address: '1 Main St',
+      official_url: 'https://example.org',
+    };
+    expect(await ai.summarize({ query: 'food', candidates: [row] })).toEqual({
+      summary: 'These services offer free groceries to low-income families.',
+      provider: 'gemini',
     });
-    expect([...result.explanations]).toEqual([[1, 'Offers free groceries to low-income families.']]);
-    expect(
-      p.generateJson.mock.calls[0][0].schema.properties.explanations.items.properties.resource_id.enum,
-    ).toEqual([1, 2, 3]);
+    const sent = JSON.parse(p.generateJson.mock.calls[0][0].input);
+    expect(sent.candidates[0]).not.toHaveProperty('contact_phone');
+    expect(sent.candidates[0]).not.toHaveProperty('physical_address');
+    expect(sent.candidates[0]).not.toHaveProperty('official_url');
+  });
+
+  it('drops a summary that adds contact details', async () => {
+    const p = provider('gemini', async () => ({ summary: 'Call 604-555-1234 today.' }));
+    const ai = createAiService({ providers: [p], log: quiet });
+    expect(await ai.summarize({ query: 'food', candidates: [{ resource_id: 1 }] })).toBeNull();
   });
 });
 
@@ -193,8 +240,8 @@ describe('helpers', () => {
     ['Email help@example.org', false],
     ['', false],
     ['x'.repeat(301), false],
-  ])('isGroundedExplanation(%j) is %s', (text, ok) => {
-    expect(isGroundedExplanation(text)).toBe(ok);
+  ])('isGroundedText(%j) is %s', (text, ok) => {
+    expect(isGroundedText(text, 300)).toBe(ok);
   });
 
   it('createAiFromConfig skips providers without keys', () => {

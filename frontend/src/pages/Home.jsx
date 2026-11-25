@@ -6,7 +6,10 @@ import SearchBar from '../components/SearchBar.jsx';
 import ResourceGrid from '../components/ResourceGrid.jsx';
 import SortSelect from '../components/SortSelect.jsx';
 import { sortResources } from '../lib/sort.js';
-import { CardSkeletons, ErrorMessage, NoResults } from '../components/Status.jsx';
+import { ErrorMessage, NoResults, NotAServiceRequest } from '../components/Status.jsx';
+import SearchProgress from '../components/SearchProgress.jsx';
+import SummaryPanel from '../components/SummaryPanel.jsx';
+import EmergencyBanner from '../components/EmergencyBanner.jsx';
 
 const SORT_OPTIONS = [
   { value: 'relevance', label: 'Best match' },
@@ -18,13 +21,11 @@ function Results() {
   const { search } = useAppState();
   const [sort, setSort] = useState('relevance');
   const sectionRef = useRef(null);
-  const { status, response, error } = search;
+  const { status, response, error, summary } = search;
 
-  // Bring new results into view once a search finishes.
+  // Bring the progress panel into view when a search starts, and the results when it finishes.
   useEffect(() => {
-    if (status === 'done' || status === 'error') {
-      sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (status !== 'idle') sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [status, response]);
 
   if (status === 'idle') return null;
@@ -44,6 +45,7 @@ function Results() {
           </h2>
           <p className="mt-1 text-sm text-slate-500" aria-live="polite">
             {status === 'loading' && 'Searching verified services…'}
+            {status === 'done' && response.status === 'irrelevant' && 'No search was run'}
             {status === 'done' &&
               response.status === 'ok' &&
               `Showing ${response.count} ${response.count === 1 ? 'resource' : 'resources'} ${where}`}
@@ -55,11 +57,18 @@ function Results() {
         )}
       </div>
 
-      {status === 'loading' && <CardSkeletons />}
+      {status === 'loading' && <SearchProgress />}
       {status === 'error' && <ErrorMessage error={error} />}
+      {status === 'done' && <EmergencyBanner urgency={response.urgency} />}
+      {status === 'done' && response.status === 'irrelevant' && (
+        <NotAServiceRequest message={response.message} />
+      )}
       {status === 'done' && response.status === 'no_results' && <NoResults message={response.message} />}
       {status === 'done' && response.status === 'ok' && (
-        <ResourceGrid resources={sortResources(response.results, sort)} />
+        <>
+          <SummaryPanel summary={summary} />
+          <ResourceGrid resources={sortResources(response.results, sort)} />
+        </>
       )}
     </section>
   );

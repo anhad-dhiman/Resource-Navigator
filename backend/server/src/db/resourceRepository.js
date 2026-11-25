@@ -16,23 +16,41 @@ const SEARCH_DOCUMENT = `to_tsvector('english',
 export function createResourceRepository(pool) {
   return {
     /**
-     * Finds public resources matching any category or any keyword.
+     * Finds public resources for an AI interpretation. Categories, when given,
+     * are a strict filter and keywords only rank the results; with no
+     * categories, a resource matching any keyword is returned.
      * @param {{categories: string[], keywords: string[], city: string|null, limit: number}} params
-     * @returns {Promise<object[]>} Rows ordered by category match, then text rank.
+     * @returns {Promise<object[]>} Rows ordered by text rank, then name.
      */
     async search({ categories, keywords, city, limit }) {
       const tsquery = keywords.join(' | ');
       const { rows } = await pool.query(
         `SELECT ${PUBLIC_COLUMNS},
-                (service_type = ANY($1::text[])) AS category_match,
-                ts_rank(${SEARCH_DOCUMENT}, to_tsquery('english', $2)) AS rank
+                CASE WHEN $2 <> '' THEN ts_rank(${SEARCH_DOCUMENT}, to_tsquery('english', $2)) ELSE 0 END AS rank
            FROM public_resources
-          WHERE (service_type = ANY($1::text[])
-                 OR ($2 <> '' AND ${SEARCH_DOCUMENT} @@ to_tsquery('english', $2)))
+          WHERE (CASE WHEN cardinality($1::text[]) > 0
+                      THEN service_type = ANY($1::text[])
+                      ELSE $2 <> '' AND ${SEARCH_DOCUMENT} @@ to_tsquery('english', $2)
+                 END)
             AND ($3::text IS NULL OR lower(city) = lower($3))
-          ORDER BY category_match DESC, rank DESC, service_name
+          ORDER BY rank DESC, service_name
           LIMIT $4`,
         [categories, tsquery, city, limit],
+      );
+      return rows;
+    },
+
+    /**
+     * Public resources by ID, in the order given; IDs that are missing or not public are skipped.
+     * @param {number[]} ids
+     * @returns {Promise<object[]>}
+     */
+    async findByIds(ids) {
+      const { rows } = await pool.query(
+        `SELECT ${PUBLIC_COLUMNS} FROM public_resources
+          WHERE resource_id = ANY($1::int[])
+          ORDER BY array_position($1::int[], resource_id)`,
+        [ids],
       );
       return rows;
     },

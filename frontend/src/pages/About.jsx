@@ -39,8 +39,11 @@ export default function About() {
           You describe what you need in your own words. An AI model works out which kinds of services you
           need, and we search our directory for services that have been checked and verified. Every phone
           number, address and opening hour comes from our verified records, never from the AI. The AI only
-          writes the short &quot;Why this may help&quot; summary on each card, using that service&apos;s own
-          listing.
+          writes the short summary above the results, using the listings it was shown.
+        </p>
+        <p>
+          If your request sounds like an emergency, we show 9-1-1 first: this site cannot send help. Searches
+          that are not about community services are not run, and repeated ones pause searching for 30 minutes.
         </p>
         <p>
           If nothing matches, we&apos;ll point you to <strong>211 British Columbia</strong> (call or text
